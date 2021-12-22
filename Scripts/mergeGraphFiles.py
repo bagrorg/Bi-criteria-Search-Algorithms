@@ -3,6 +3,7 @@ import sys
 file_time_name = sys.argv[1]
 file_dist_name = sys.argv[2]
 file_coords_name = sys.argv[3]
+file_output_name = sys.argv[4]
 
 file_time = open(file_time_name, 'r')
 file_dist = open(file_dist_name, 'r')
@@ -15,29 +16,29 @@ vertexes = {}
 
 for line in file_coords.readlines():
     if line[0] == 'v':
-        line = line.split(' ')
-        vertexes[int(line[1])] = (line[2], line[3][:-1])
+        line = line.strip().split(' ')
+        vertexes[int(line[1])] = (line[2], line[3])
 
 for line_t, line_d in zip(file_time.readlines(), file_dist.readlines()):
     if line_t[0] == 'p':
-        line = line_t.split(' ')
+        line = line_t.strip().split(' ')
         v_count = line[2]
         a_count = line[3]
     elif line_t[0] == 'a':
-        line_t = line_t.split(' ')
-        line_d = line_d.split(' ')
+        line_t = line_t.strip().split(' ')
+        line_d = line_d.strip().split(' ')
         id1 = int(line_t[1])
         id2 = int(line_t[2])
 
-        cost_t = line_t[3][:-1]
-        cost_d = line_d[3][:-1]
+        cost_t = line_t[3]
+        cost_d = line_d[3]
 
         edges[(id1, id2)] = (cost_t, cost_d)
 
 file_time.close()
 file_dist.close()
 
-res_file = open('nyc_graph.gr', 'w')
+res_file = open(file_output_name, 'w')
 
 res_file.write('p sp ' + str(v_count) + ' ' + str(a_count))
 
