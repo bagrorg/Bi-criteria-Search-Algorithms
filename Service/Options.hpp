@@ -14,6 +14,7 @@ struct Options {
     int goalId;
     float epsDist = 0.f;
     float epsTime = 0.f;
+    std::string historyFile;
 };
 
 Options optionsFromInput(const po::variables_map &vm);
