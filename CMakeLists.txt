@@ -17,6 +17,15 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Algorithm/DummyAlgorithm.cpp
                               Service/Graph.hpp
                               Service/Graph.cpp
+                              Service/Node.hpp
+                              Service/Node.cpp
+                              Containers/Closed.hpp
+                              Containers/Open.hpp
+                              Containers/MapClosed.hpp
+                              Containers/MapClosed.cpp
+                              Containers/MapSetOpen.hpp
+                              Containers/MapSetOpen.cpp
+                              Service/PairHash.hpp
                               Algorithm/PPA.hpp
                               Algorithm/PPA.cpp)
 

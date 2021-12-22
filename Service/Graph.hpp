@@ -11,7 +11,7 @@ struct Edge {
 };
 
 struct Vertex {
-    float x, y;
+    long x, y;
     int id;
 
     std::vector<Edge> neighs;
