@@ -31,5 +31,9 @@ Options optionsFromInput(const po::variables_map &vm) {
         opts.graphFile = vm["graph_path"].as<std::string>();
     }
 
+    if (vm.count("history_path")) {
+        opts.historyFile = vm["history_path"].as<std::string>();
+    }
+
     return opts;
 }

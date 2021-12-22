@@ -2,6 +2,7 @@
 
 #include "Service/Measurements.hpp"
 #include "Service/Options.hpp"
+#include "Service/AlgorithmState.hpp"
 
 class Algorithm {
 public:
@@ -10,10 +11,13 @@ public:
     virtual void runAlgorithm(const Options &opts) = 0;
 
     void writeReport(const Options &opts) {
-        if (opts.reportFile.compare("") == 0) {
+        if (opts.reportFile.empty()) {
             writeCout(res_, opts);
         } else {
             writeCsv(res_, opts);
+        }
+        if (!opts.historyFile.empty()) {
+            writeHistory(history_, opts);
         }
     }
 
@@ -24,4 +28,5 @@ public:
 protected:
     std::string name_;
     Measurements res_;
+    AlgorithmStateHistory history_;
 };

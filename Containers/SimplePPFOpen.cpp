@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 void SimplePPFOpen::clear() {
     pairs_.clear();
@@ -49,4 +50,13 @@ PPF SimplePPFOpen::getBest() {
 
 float SimplePPFOpen::gMin(int id) {
     return gTimeMin_.find(id) == gTimeMin_.end() ? std::numeric_limits<float>::infinity() : gTimeMin_[id];
+}
+
+std::vector<Node> SimplePPFOpen::getAllNodes() {
+    std::vector<Node> result;
+    result.reserve(set_.size());
+    for (const auto& pair: set_) {
+        result.push_back(pair.getTlNode());
+    }
+    return result;
 }

@@ -17,8 +17,6 @@ const Vertex &Graph::getVertex(int id) const {
 
 void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
     std::ifstream in(data_file);
-    
-    std::cout << in.good() << std::endl;
 
     for (std::string line; std::getline(in, line);) {
         std::istringstream line_stream(line);

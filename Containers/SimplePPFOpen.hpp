@@ -22,6 +22,8 @@ public:
 
     bool isDominated(const PPF &pair, int goalId) override;
 
+    std::vector<Node> getAllNodes() override;
+
 private:
     std::set<PPF> set_;
     std::unordered_map<int, std::list<PPF>> pairs_;
