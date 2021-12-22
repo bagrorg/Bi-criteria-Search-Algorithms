@@ -9,4 +9,5 @@ public:
     virtual void add(T n) = 0;
     virtual bool isEmpty() const = 0;
     virtual T getBest() = 0;
+    virtual void clear() = 0;
 };

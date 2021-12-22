@@ -12,5 +12,5 @@ public:
     void add(Node n) override;
     bool wasExpanded(const Node& n) const override;
 private:
-    std::unordered_map<Position, Node, PairHash> nodes_;
+    std::unordered_map<int, Node> nodes_;
 };
