@@ -15,6 +15,8 @@ public:
 private:
     void runAlgorithmImpl(const Graph &graph, const Options& opts);
 
+    void updateHistory();
+
     std::unique_ptr<PPFOpen> open_;
     std::unique_ptr<PPFOpen> solutions_;
     std::function<float(int)> hDistFunc_;

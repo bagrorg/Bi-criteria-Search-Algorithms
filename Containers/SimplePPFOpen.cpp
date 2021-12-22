@@ -2,7 +2,6 @@
 
 #include <limits>
 #include <algorithm>
-#include <iostream>
 
 void SimplePPFOpen::clear() {
     pairs_.clear();
@@ -10,9 +9,9 @@ void SimplePPFOpen::clear() {
     gTimeMin_.clear();
 }
 
-bool SimplePPFOpen::isDominated(const PPF &pair, int goalId) {
-    bool dominatedBySolution = (1.f + epsTime_) * pair.getBrNode().getHeuristicStatsTime().F >= gMin(goalId);
-    bool dominatedByPPF = pair.getBrNode().getHeuristicStatsTime().g >= gMin(pair.getId());
+bool SimplePPFOpen::isDominated(const PPF &pair, int goalId, bool newPair) {
+    bool dominatedBySolution = pair.getId() != goalId && (1.f + epsTime_) * pair.getBrNode()->getHeuristicStatsTime().F >= gMin(goalId);
+    bool dominatedByPPF = newPair && pair.getBrNode()->getHeuristicStatsTime().g >= gMin(pair.getId());
     return dominatedBySolution || dominatedByPPF;
 }
 
@@ -22,7 +21,7 @@ size_t SimplePPFOpen::size() const {
 
 void SimplePPFOpen::add(PPF n) {
     auto& pairs = pairs_[n.getId()];
-    gTimeMin_[n.getId()] = std::min(gMin(n.getId()), n.getBrNode().getHeuristicStatsTime().g);
+    gTimeMin_[n.getId()] = std::min(gMin(n.getId()), n.getBrNode()->getHeuristicStatsTime().g);
     for (auto iter = pairs.begin(); iter != pairs.end(); ++iter) {
         PPF newPair = PPF::merge(*iter, n);
         if (newPair.isBounded(epsDist_, epsTime_)) {
@@ -56,7 +55,7 @@ std::vector<Node> SimplePPFOpen::getAllNodes() {
     std::vector<Node> result;
     result.reserve(set_.size());
     for (const auto& pair: set_) {
-        result.push_back(pair.getTlNode());
+        result.push_back(*pair.getTlNode());
     }
     return result;
 }

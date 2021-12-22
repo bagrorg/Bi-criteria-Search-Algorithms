@@ -20,7 +20,7 @@ public:
 
     void clear() override;
 
-    bool isDominated(const PPF &pair, int goalId) override;
+    bool isDominated(const PPF &pair, int goalId, bool newPair) override;
 
     std::vector<Node> getAllNodes() override;
 
