@@ -1,12 +1,12 @@
 #pragma once
 
-#include <stddef.h>
-#include "Service/Node.hpp"
+#include <cstddef>
 
+template<typename T>
 class Open {
 public:
     virtual size_t size() const = 0;
-    virtual void addNode(Node n) = 0;
+    virtual void add(T n) = 0;
     virtual bool empty() const = 0;
-    virtual Node getBestNode() = 0;
+    virtual T getBest() = 0;
 };

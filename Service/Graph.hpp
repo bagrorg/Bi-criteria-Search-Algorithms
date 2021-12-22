@@ -19,9 +19,9 @@ struct Vertex {
 
 class Graph {
 public:
-    Graph(const std::vector<Vertex> &adjList);
+    Graph(std::vector<Vertex> adjList);
 
-    std::vector<Edge> getNeighbours(int id);
+    std::vector<Edge> getNeighbours(int id) const;
 private:
     std::vector<Vertex> adjList_;
 };

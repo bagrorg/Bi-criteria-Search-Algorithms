@@ -5,9 +5,9 @@
 #include <string>
 #include <sstream>
 
-Graph::Graph(const std::vector<Vertex> &adjList) : adjList_(adjList) {};
+Graph::Graph(std::vector<Vertex> adjList) : adjList_(std::move(adjList)) {};
 
-std::vector<Edge> Graph::getNeighbours(int id) {
+std::vector<Edge> Graph::getNeighbours(int id) const {
     return adjList_[id].neighs;
 }
 

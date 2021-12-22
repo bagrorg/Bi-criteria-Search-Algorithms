@@ -10,6 +10,8 @@ struct Options {
     size_t iterations = 1;
      /* something from command line query */
     std::string graph_file;
+    int startId;
+    int goalId;
 };
 
 Options optionsFromInput(const po::variables_map &vm);

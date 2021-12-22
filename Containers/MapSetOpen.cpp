@@ -4,7 +4,7 @@ size_t MapSetOpen::size() const {
     return nodes_.size();
 }
 
-void MapSetOpen::addNode(Node n) {
+void MapSetOpen::add(Node n) {
     auto pos = n.getPos();
 
     if (nodes_.find(pos) != nodes_.end()) {
@@ -14,14 +14,14 @@ void MapSetOpen::addNode(Node n) {
     }
 
     nodes_[pos] = n;
-    heap_.insert(n);
+    heap_.insert(std::move(n));
 }
 
 bool MapSetOpen::empty() const {
     return size() == 0;
 }
 
-Node MapSetOpen::getBestNode() {
+Node MapSetOpen::getBest() {
     auto it = heap_.begin();
     heap_.erase(it);
 

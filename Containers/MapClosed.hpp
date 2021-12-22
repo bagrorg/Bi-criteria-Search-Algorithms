@@ -1,15 +1,16 @@
 #pragma once
 
-#include <stddef.h>
+#include <cstddef>
 #include <unordered_map>
+#include <Service/Node.hpp>
 #include "Closed.hpp"
 #include "Service/PairHash.hpp"
 
-class MapClosed : public Closed {
+class MapClosed : public Closed<Node> {
 public:
-    virtual size_t size() const;
-    virtual void addNode(Node n);
-    virtual bool wasExpanded(Node n) const;
+    size_t size() const override;
+    void add(Node n) override;
+    bool wasExpanded(const Node& n) const override;
 private:
-    std::unordered_map<std::pair<long, long>, Node, PairHash> nodes_;
+    std::unordered_map<Position, Node, PairHash> nodes_;
 };

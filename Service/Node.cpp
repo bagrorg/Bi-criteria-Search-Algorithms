@@ -1,6 +1,6 @@
 #include "Node.hpp"
 
-Node::Node(Vertex v, float g, float h, float F, Node *parent) : v_(v), parent_(parent), hs_({g, h, F}) {}
+Node::Node(Vertex v, float g, float h, float F, Node *parent) : v_(std::move(v)), parent_(parent), hs_({g, h, F}) {}
 
 bool Node::operator==(const Node &other) const {
     return v_.x == other.v_.x && v_.y == other.v_.y;
@@ -15,10 +15,14 @@ Vertex Node::getVertex() const {
     return v_;
 }
 
-std::pair<long, long> Node::getPos() const {
+Position Node::getPos() const {
     return {v_.x, v_.y};
 }
 
 HeuristicStats Node::getHeuristicStats() const {
     return hs_;
+}
+
+Node *Node::getParent() const {
+    return parent_;
 }
