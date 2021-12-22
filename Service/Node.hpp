@@ -6,24 +6,31 @@ struct HeuristicStats {
     float g;
     float h;
     float F;
-};
 
-using Position = std::pair<long, long>;
+    bool operator<(const HeuristicStats &rhs) const;
+};
 
 class Node {
 public:
     Node() = default;
-    Node (Vertex v, float g, float h, float F, Node *parent = nullptr);
+
+    Node(Vertex v, const HeuristicStats &hsDist, const HeuristicStats &hsTime, const Node *parent = nullptr);
+
     bool operator==(const Node &other) const;
     bool operator<(const Node &other) const;
 
     Vertex getVertex() const;
     Position getPos() const;
-    HeuristicStats getHeuristicStats() const;
-    Node *getParent() const;
+    HeuristicStats getHeuristicStats1() const;
+    HeuristicStats getHeuristicStats2() const;
+    const Node *getParent() const;
+
+    Node extend(const Edge& edge, const Graph& graph, float hDist, float hTime) const;
+
 private:
     Vertex v_;
-    HeuristicStats hs_{};
+    HeuristicStats hsDist_{};
+    HeuristicStats hsTime_{};
 
-    Node *parent_ = nullptr;
+    const Node *parent_ = nullptr;
 };

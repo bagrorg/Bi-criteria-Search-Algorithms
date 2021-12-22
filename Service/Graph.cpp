@@ -11,6 +11,10 @@ std::vector<Edge> Graph::getNeighbours(int id) const {
     return adjList_[id].neighs;
 }
 
+const Vertex &Graph::getVertex(int id) const {
+    return adjList_[id];
+}
+
 void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
     std::ifstream in(data_file);
     
@@ -34,8 +38,10 @@ void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
 
             int id = std::atoi(vtx.data());
 
-            dest[id].x = std::atoi(x.data());
-            dest[id].y = std::atoi(y.data());
+            dest[id].position = {
+                std::atol(x.data()),
+                std::atol(y.data())
+            };
             dest[id].id = id;
         }
         else if (type == "a") {
@@ -44,8 +50,8 @@ void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
 
             Edge e = {
                 std::atoi(vtx2.data()),
-                static_cast<float>(std::atoi(time.data())),
-                static_cast<float>(std::atoi(dist.data()))
+                static_cast<float>(std::atof(time.data())),
+                static_cast<float>(std::atof(dist.data()))
             };
             dest[std::atoi(vtx1.data())].neighs.push_back(e);
         }

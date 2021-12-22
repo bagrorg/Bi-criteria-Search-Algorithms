@@ -11,7 +11,7 @@ class MapSetOpen : public Open<Node> {
 public:
     size_t size() const override;
     void add(Node n) override;
-    bool empty() const override;
+    bool isEmpty() const override;
     Node getBest() override;
 private:
     std::set<Node> heap_;
