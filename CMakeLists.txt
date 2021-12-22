@@ -34,6 +34,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/PPF.cpp
                               Containers/PPFOpen.hpp
                               Containers/SimplePPFOpen.cpp
-                              Containers/SimplePPFOpen.hpp)
+                              Containers/SimplePPFOpen.hpp
+                              Algorithm/BOA.hpp
+                              Algorithm/BOA.cpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )
