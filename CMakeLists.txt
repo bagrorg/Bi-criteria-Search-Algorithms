@@ -16,6 +16,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Algorithm/DummyAlgorithm.hpp
                               Algorithm/DummyAlgorithm.cpp
                               Service/Graph.hpp
-                              Service/Graph.cpp)
+                              Service/Graph.cpp
+                              Algorithm/PPA.hpp
+                              Algorithm/PPA.cpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )

@@ -42,7 +42,11 @@ void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
             std::string vtx1, vtx2, time, dist;
             line_stream >> vtx1 >> vtx2 >> time >> dist;
 
-            Edge e = {std::atoi(vtx2.data()), std::atoi(time.data()), std::atoi(dist.data())};
+            Edge e = {
+                std::atoi(vtx2.data()),
+                static_cast<float>(std::atoi(time.data())),
+                static_cast<float>(std::atoi(dist.data()))
+            };
             dest[std::atoi(vtx1.data())].neighs.push_back(e);
         }
     }
