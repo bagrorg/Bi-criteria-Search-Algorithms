@@ -13,7 +13,7 @@ public:
     void runAlgorithm(const Options &opts) override;
 
 private:
-    void runAlgorithmImpl(const Graph &graph, int startId, int goalId);
+    void runAlgorithmImpl(const Graph &graph, const Options& opts);
 
     std::unique_ptr<PPFOpen> open_;
     std::unique_ptr<PPFOpen> solutions_;
