@@ -1,7 +1,10 @@
 #include "PPA.hpp"
 
-PPA::PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFClosed> closed)
-    : Algorithm("PP-A*"), _open(std::move(open)), _closed(std::move(closed)) {}
+PPA::PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFClosed> closed,
+         std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc)
+    : Algorithm("PP-A*"),
+      open_(std::move(open)), closed_(std::move(closed)),
+      hDistFunc_(std::move(hDistFunc)), hTimeFunc_(std::move(hTimeFunc)) {}
 
 void PPA::runAlgorithm(const Options &opts) {
     const Graph graph = [&opts]() -> Graph {
@@ -12,42 +15,38 @@ void PPA::runAlgorithm(const Options &opts) {
 
     for (int i = 0; i < opts.iterations; i++) {
         runAlgorithmImpl(graph, opts.startId, opts.goalId);
-        _open->clear();
-        _closed->clear();
+        open_->clear();
+        closed_->clear();
     }
 }
 
 void PPA::runAlgorithmImpl(const Graph &graph, int idStart, int idGoal) {
     {
-        const Vertex &v = graph.getVertex(idStart);
-        auto [hDist, hTime] = getHeuristic(v.position);
+        float hDist = hDistFunc_(idStart);
+        float hTime = hTimeFunc_(idStart);
         Node startNode(
-            v,
+            graph.getVertex(idStart),
             HeuristicStats{0, hDist, hDist},
             HeuristicStats{0, hTime, hTime}
         );
-        _open->add(PPF(idStart, startNode, startNode));
+        open_->add(PPF(idStart, startNode, startNode));
     }
 
-    while (!_open->isEmpty()) {
-        PPF pair = _open->getBest();
+    while (!open_->isEmpty()) {
+        PPF pair = open_->getBest();
 
-        if (_open->isDominated(pair)) continue;
+        if (open_->isDominated(pair)) continue;
         if (pair.getId() == idGoal) {
             // mergeSolution(pair);
             continue;
         }
 
         for (const Edge &edge: graph.getNeighbours(pair.getId())) {
-            const Vertex &v = graph.getVertex(idStart);
-            auto [hDist, hTime] = getHeuristic(v.position);
+            float hDist = hDistFunc_(edge.to_id);
+            float hTime = hTimeFunc_(edge.to_id);
             PPF newPair = pair.extend(edge, graph, hDist, hTime);
-            if (_open->isDominated(newPair)) continue;
-            _open->add(std::move(newPair));
+            if (open_->isDominated(newPair)) continue;
+            open_->add(std::move(newPair));
         }
     }
-}
-
-std::pair<float, float> PPA::getHeuristic(const Position& position) const {
-    return {0.f, 0.f};
 }

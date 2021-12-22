@@ -8,15 +8,16 @@
 
 class PPA : public Algorithm {
 public:
-    PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFClosed> closed);
+    PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFClosed> closed,
+        std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc);
 
     void runAlgorithm(const Options &opts) override;
 
 private:
     void runAlgorithmImpl(const Graph &graph, int idStart, int idGoal);
 
-    std::pair<float, float> getHeuristic(const Position& position) const;
-
-    std::unique_ptr<PPFOpen> _open;
-    std::unique_ptr<PPFClosed> _closed;
+    std::unique_ptr<PPFOpen> open_;
+    std::unique_ptr<PPFClosed> closed_;
+    std::function<float(int)> hDistFunc_;
+    std::function<float(int)> hTimeFunc_;
 };
