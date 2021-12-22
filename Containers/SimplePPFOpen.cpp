@@ -21,7 +21,6 @@ size_t SimplePPFOpen::size() const {
 
 void SimplePPFOpen::add(PPF n) {
     auto& pairs = pairs_[n.getId()];
-    gTimeMin_[n.getId()] = std::min(gMin(n.getId()), n.getBrNode()->getHeuristicStatsTime().g);
     for (auto iter = pairs.begin(); iter != pairs.end(); ++iter) {
         PPF newPair = PPF::merge(*iter, n);
         if (newPair.isBounded(epsDist_, epsTime_)) {
@@ -44,6 +43,7 @@ PPF SimplePPFOpen::getBest() {
     PPF best = set_.extract(set_.begin()).value();
     auto& pairs = pairs_[best.getId()];
     pairs.erase(std::find(pairs.begin(), pairs.end(), best));
+    gTimeMin_[best.getId()] = std::min(gMin(best.getId()), best.getBrNode()->getHeuristicStatsTime().g);
     return best;
 }
 
