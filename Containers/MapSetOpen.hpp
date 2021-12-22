@@ -13,7 +13,8 @@ public:
     void add(Node n) override;
     bool isEmpty() const override;
     Node getBest() override;
+    void clear() override;
 private:
     std::set<Node> heap_;
-    std::unordered_map<Position, Node, PairHash> nodes_;
+    std::unordered_map<int, Node> nodes_;
 };

@@ -3,6 +3,7 @@
 #include "Algorithm/Algorithm.hpp"
 #include "Algorithm/DummyAlgorithm.hpp"
 #include "Algorithm/PPA.hpp"
+#include "Algorithm/BOA.hpp"
 #include <string>
 #include <memory>
 
