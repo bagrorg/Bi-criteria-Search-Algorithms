@@ -5,10 +5,14 @@
 #include <string>
 #include <sstream>
 
-Graph::Graph(const std::vector<Vertex> &adjList) : adjList_(adjList) {};
+Graph::Graph(std::vector<Vertex> adjList) : adjList_(std::move(adjList)) {};
 
-std::vector<Edge> Graph::getNeighbours(int id) {
+std::vector<Edge> Graph::getNeighbours(int id) const {
     return adjList_[id].neighs;
+}
+
+const Vertex &Graph::getVertex(int id) const {
+    return adjList_[id];
 }
 
 void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
@@ -34,15 +38,21 @@ void parseGraph(std::string data_file, std::vector<Vertex> &dest) {
 
             int id = std::atoi(vtx.data());
 
-            dest[id].x = std::atoi(x.data());
-            dest[id].y = std::atoi(y.data());
+            dest[id].position = {
+                std::atol(x.data()),
+                std::atol(y.data())
+            };
             dest[id].id = id;
         }
         else if (type == "a") {
             std::string vtx1, vtx2, time, dist;
             line_stream >> vtx1 >> vtx2 >> time >> dist;
 
-            Edge e = {std::atoi(vtx2.data()), std::atoi(time.data()), std::atoi(dist.data())};
+            Edge e = {
+                std::atoi(vtx2.data()),
+                static_cast<float>(std::atof(time.data())),
+                static_cast<float>(std::atof(dist.data()))
+            };
             dest[std::atoi(vtx1.data())].neighs.push_back(e);
         }
     }

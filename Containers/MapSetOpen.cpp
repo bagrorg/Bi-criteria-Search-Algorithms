@@ -4,24 +4,25 @@ size_t MapSetOpen::size() const {
     return nodes_.size();
 }
 
-void MapSetOpen::addNode(Node n) {
+void MapSetOpen::add(Node n) {
     auto pos = n.getPos();
 
     if (nodes_.find(pos) != nodes_.end()) {
-        if (nodes_[pos].getHeuristicStats().g <= n.getHeuristicStats().g) {
-            return;
-        }
+//        if (nodes_[pos].getHeuristicStats().g <= n.getHeuristicStats().g) {
+//            return;
+//        }
+        // TODO: fix with two heuristicStats
     }
 
     nodes_[pos] = n;
-    heap_.insert(n);
+    heap_.insert(std::move(n));
 }
 
-bool MapSetOpen::empty() const {
+bool MapSetOpen::isEmpty() const {
     return size() == 0;
 }
 
-Node MapSetOpen::getBestNode() {
+Node MapSetOpen::getBest() {
     auto it = heap_.begin();
     heap_.erase(it);
 

@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 
+using Position = std::pair<long, long>;
+
 struct Edge {
     int to_id;
 
@@ -11,7 +13,7 @@ struct Edge {
 };
 
 struct Vertex {
-    long x, y;
+    Position position;
     int id;
 
     std::vector<Edge> neighs;
@@ -19,9 +21,10 @@ struct Vertex {
 
 class Graph {
 public:
-    Graph(const std::vector<Vertex> &adjList);
+    Graph(std::vector<Vertex> adjList);
 
-    std::vector<Edge> getNeighbours(int id);
+    std::vector<Edge> getNeighbours(int id) const;
+    const Vertex& getVertex(int id) const;
 private:
     std::vector<Vertex> adjList_;
 };
