@@ -2,6 +2,7 @@
 
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 void SimplePPFOpen::clear() {
     pairs_.clear();

@@ -52,7 +52,6 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
             solutions_->add(pair);
             continue;
         }
-
         for (const Edge &edge: graph.getNeighbours(pair.getId())) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
