@@ -36,7 +36,7 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Containers/SimplePPFOpen.cpp
                               Containers/SimplePPFOpen.hpp
                               Service/AlgorithmState.cpp
-                              Service/AlgorithmState.hpp)
+                              Service/AlgorithmState.hpp
                               Algorithm/BOA.hpp
                               Algorithm/BOA.cpp)
 
