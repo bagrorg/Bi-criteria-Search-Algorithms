@@ -2,8 +2,6 @@
 
 #include <Service/Node.hpp>
 #include <utility>
-#include "Containers/Open.hpp"
-#include "Containers/Closed.hpp"
 
 class PPF {
 public:
@@ -16,6 +14,14 @@ public:
     const Node &getBrNode() const;
 
     PPF extend(const Edge &edge, const Graph& graph, float hDist, float hTime);
+
+    static PPF merge(const PPF& a, const PPF& b);
+
+    bool isBounded(float epsDist, float epsTime) const;
+
+    bool operator==(const PPF& other) const;
+
+    bool operator<(const PPF& other) const;
 
 private:
     int id_;

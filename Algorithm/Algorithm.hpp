@@ -10,7 +10,7 @@ public:
     virtual void runAlgorithm(const Options &opts) = 0;
 
     void writeReport(const Options &opts) {
-        if (opts.report_file.compare("") == 0) {
+        if (opts.reportFile.compare("") == 0) {
             writeCout(res_, opts);
         } else {
             writeCsv(res_, opts);

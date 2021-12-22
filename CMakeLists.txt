@@ -33,6 +33,7 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/PPF.hpp
                               Service/PPF.cpp
                               Containers/PPFOpen.hpp
-                              Containers/PPFClosed.hpp)
+                              Containers/SimplePPFOpen.cpp
+                              Containers/SimplePPFOpen.hpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )

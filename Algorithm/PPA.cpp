@@ -1,43 +1,47 @@
 #include "PPA.hpp"
 
-PPA::PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFClosed> closed,
+PPA::PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFOpen> solutions,
          std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc)
     : Algorithm("PP-A*"),
-      open_(std::move(open)), closed_(std::move(closed)),
+      open_(std::move(open)), solutions_(std::move(solutions)),
       hDistFunc_(std::move(hDistFunc)), hTimeFunc_(std::move(hTimeFunc)) {}
 
 void PPA::runAlgorithm(const Options &opts) {
     const Graph graph = [&opts]() -> Graph {
         std::vector<Vertex> vs;
-        parseGraph(opts.graph_file, vs);
+        parseGraph(opts.graphFile, vs);
         return Graph(std::move(vs));
     }();
+    open_->withEpsDist(opts.epsDist);
+    open_->withEpsTime(opts.epsTime);
+    solutions_->withEpsDist(opts.epsDist);
+    solutions_->withEpsTime(opts.epsTime);
 
     for (int i = 0; i < opts.iterations; i++) {
         runAlgorithmImpl(graph, opts.startId, opts.goalId);
         open_->clear();
-        closed_->clear();
+        solutions_->clear();
     }
 }
 
-void PPA::runAlgorithmImpl(const Graph &graph, int idStart, int idGoal) {
+void PPA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
     {
-        float hDist = hDistFunc_(idStart);
-        float hTime = hTimeFunc_(idStart);
+        float hDist = hDistFunc_(startId);
+        float hTime = hTimeFunc_(startId);
         Node startNode(
-            graph.getVertex(idStart),
+            graph.getVertex(startId),
             HeuristicStats{0, hDist, hDist},
             HeuristicStats{0, hTime, hTime}
         );
-        open_->add(PPF(idStart, startNode, startNode));
+        open_->add(PPF(startId, startNode, startNode));
     }
 
     while (!open_->isEmpty()) {
         PPF pair = open_->getBest();
 
-        if (open_->isDominated(pair)) continue;
-        if (pair.getId() == idGoal) {
-            // mergeSolution(pair);
+        if (open_->isDominated(pair, goalId)) continue;
+        if (pair.getId() == goalId) {
+            solutions_->add(pair);
             continue;
         }
 
@@ -45,7 +49,7 @@ void PPA::runAlgorithmImpl(const Graph &graph, int idStart, int idGoal) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
             PPF newPair = pair.extend(edge, graph, hDist, hTime);
-            if (open_->isDominated(newPair)) continue;
+            if (open_->isDominated(newPair, goalId)) continue;
             open_->add(std::move(newPair));
         }
     }

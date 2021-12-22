@@ -3,8 +3,8 @@
 #include <sstream>
 
 void writeCsv(const Measurements &results, const Options &opts) {
-    bool exists = std::ifstream(opts.report_file).good();
-    std::ofstream of(opts.report_file, std::ios::app);
+    bool exists = std::ifstream(opts.reportFile).good();
+    std::ofstream of(opts.reportFile, std::ios::app);
 
     std::stringstream line;
     if (!exists) {
