@@ -35,3 +35,5 @@ private:
 
     std::shared_ptr<Node> parent_ = nullptr;
 };
+
+using NodePtr = std::shared_ptr<Node>;

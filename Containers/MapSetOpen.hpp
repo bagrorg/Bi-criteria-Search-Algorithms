@@ -7,14 +7,14 @@
 #include <Service/Node.hpp>
 #include "Service/PairHash.hpp"
 
-class MapSetOpen : public Open<Node> {
+class MapSetOpen : public Open<NodePtr> {
 public:
     size_t size() const override;
-    void add(Node n) override;
+    void add(NodePtr n) override;
     bool isEmpty() const override;
-    Node getBest() override;
+    NodePtr getBest() override;
     void clear() override;
 private:
-    std::set<Node> heap_;
-    std::unordered_map<int, Node> nodes_;
+    std::set<NodePtr> heap_;
+    std::unordered_map<int, NodePtr> nodes_;
 };
