@@ -30,40 +30,38 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
     {
         float hDist = hDistFunc_(opts.startId);
         float hTime = hTimeFunc_(opts.startId);
-        Node startNode(
+        auto startNode = std::make_shared<Node>(
             graph.getVertex(opts.startId),
             HeuristicStats{0, hDist, hDist},
             HeuristicStats{0, hTime, hTime}
         );
         open_->add(PPF(opts.startId, startNode, startNode));
-        if (writeHistory) {
-            history_.push_back({
-                open_->getAllNodes(),
-                solutions_->getAllNodes()
-            });
-        }
+        if (writeHistory) updateHistory();
     }
 
     while (!open_->isEmpty()) {
         PPF pair = open_->getBest();
 
-        if (open_->isDominated(pair, opts.goalId)) continue;
+        if (open_->isDominated(pair, opts.goalId, false)) continue;
         if (pair.getId() == opts.goalId) {
             solutions_->add(pair);
+            if (writeHistory) updateHistory();
             continue;
         }
         for (const Edge &edge: graph.getNeighbours(pair.getId())) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
             PPF newPair = pair.extend(edge, graph, hDist, hTime);
-            if (open_->isDominated(newPair, opts.goalId)) continue;
+            if (open_->isDominated(newPair, opts.goalId, true)) continue;
             open_->add(std::move(newPair));
         }
-        if (writeHistory) {
-            history_.push_back({
-                open_->getAllNodes(),
-                solutions_->getAllNodes()
-            });
-        }
+        if (writeHistory) updateHistory();
     }
+}
+
+void PPA::updateHistory() {
+    history_.push_back({
+        open_->getAllNodes(),
+        solutions_->getAllNodes()
+    });
 }

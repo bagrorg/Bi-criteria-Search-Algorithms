@@ -10,6 +10,7 @@ nodes = []
 edges = []
 
 w, h = 1000, 1000
+margin = 0.05
 min_x, max_x, min_y, max_y = None, None, None, None
 
 with open(file_graph_name, 'r') as file_graph:
@@ -41,22 +42,22 @@ with open(file_history_name, 'r') as file_history:
         if line[0] == 'e':
             history.append(([], []))
         else:
-            positions = []
+            ids = []
             pred = None
-            for coord in map(int, line.strip().split()[1:]):
-                if pred is None:
-                    pred = coord
-                else:
-                    positions.append((pred, coord))
-                    pred = None
+            for id_ in map(int, line.strip().split()[1:]):
+                ids.append(id_)
             if line[0] == 'p':
-                history[-1][0].append(positions)
+                history[-1][0].append(ids)
             else:
-                history[-1][1].append(positions)
+                history[-1][1].append(ids)
 
 
 def transform(i, j):
-    return w * (i - min_x) / (max_x - min_x), h * (j - min_y) / (max_y - min_y)
+    i = w * (1 - 2 * margin) * (i - min_x) / (max_x - min_x)
+    i = i + margin * w
+    j = h * (1 - 2 * margin) * (j - min_y) / (max_y - min_y)
+    j = j + margin * h
+    return i, j
 
 
 def draw_node(draw, i, j, color):
@@ -69,8 +70,10 @@ def draw_edge(draw, i, j, i2, j2, color):
 
 def draw_path(draw, path, color):
     pred_i, pred_j = None, None
-    for i, j in path:
+    for i in path:
+        i, j = nodes[i]
         i, j = transform(i, j)
+        draw_node(draw, i, j, color)
         if pred_i is not None:
             draw_edge(draw, i, j, pred_i, pred_j, color)
         pred_i = i
@@ -104,4 +107,4 @@ for open_paths, solutions_paths in [([], [])] + history:
 
     images.append(im)
 
-images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=False, duration=200, loop=0)
+images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=True, duration=200, loop=0)

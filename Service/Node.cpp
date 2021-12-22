@@ -24,27 +24,27 @@ HeuristicStats Node::getHeuristicStatsTime() const {
     return hsTime_;
 }
 
-const Node *Node::getParent() const {
+std::shared_ptr<Node> Node::getParent() const {
     return parent_;
 }
 
-Node::Node(Vertex v, const HeuristicStats &hsDist, const HeuristicStats &hsTime, const Node *parent)
-    : v_(std::move(v)), hsDist_(hsDist), hsTime_(hsTime), parent_(parent) {}
+Node::Node(Vertex v, const HeuristicStats &hsDist, const HeuristicStats &hsTime, std::shared_ptr<Node> parent)
+    : v_(std::move(v)), hsDist_(hsDist), hsTime_(hsTime), parent_(std::move(parent)) {}
 
-Node Node::extend(const Edge &edge, const Graph &graph, float hDist, float hTime) const {
+Node Node::extend(const Edge &edge, const Graph &graph, float hDist, float hTime, const std::shared_ptr<Node>& parent) {
     return Node(
         graph.getVertex(edge.to_id),
         HeuristicStats{
-            hsDist_.g + edge.dist_cost,
+            parent->hsDist_.g + edge.dist_cost,
             hDist,
-            hsDist_.g + edge.dist_cost + hDist
+            parent->hsDist_.g + edge.dist_cost + hDist
         },
         HeuristicStats{
-            hsTime_.g + edge.time_cost,
+            parent->hsTime_.g + edge.time_cost,
             hTime,
-            hsTime_.g + edge.time_cost + hTime
+            parent->hsTime_.g + edge.time_cost + hTime
         },
-        this
+        parent
     );
 }
 

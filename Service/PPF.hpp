@@ -5,13 +5,14 @@
 
 class PPF {
 public:
-    PPF(int id, Node tlNode, Node brNode) : id_(id), tlNode_(std::move(tlNode)), brNode_(std::move(brNode)) {}
+    PPF(int id, std::shared_ptr<Node> tlNode, std::shared_ptr<Node> brNode)
+        : id_(id), tlNode_(std::move(tlNode)), brNode_(std::move(brNode)) {}
 
     int getId() const;
 
-    const Node &getTlNode() const;
+    const std::shared_ptr<Node> &getTlNode() const;
 
-    const Node &getBrNode() const;
+    const std::shared_ptr<Node> &getBrNode() const;
 
     PPF extend(const Edge &edge, const Graph& graph, float hDist, float hTime);
 
@@ -25,6 +26,6 @@ public:
 
 private:
     int id_;
-    Node tlNode_;
-    Node brNode_;
+    std::shared_ptr<Node> tlNode_;
+    std::shared_ptr<Node> brNode_;
 };
