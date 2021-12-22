@@ -53,9 +53,7 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
         for (const Edge &edge: graph.getNeighbours(best->getVertex().id)) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
-            std::cout << gMin(1) << std::endl;
             auto newNode = std::make_shared<Node>(Node::extend(edge, graph, hDist, hTime, best));
-            std::cout << gMin(1) << std::endl;
             if (newNode->getHeuristicStatsTime().g >= gMin(newNode->getVertex().id) || newNode->getHeuristicStatsTime().F >= gMin(goalId)) continue;
             open_->add(std::move(newNode));
         }

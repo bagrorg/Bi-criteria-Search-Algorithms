@@ -12,7 +12,6 @@ void MapSetOpen::add(NodePtr n) {
             nodes_[id]->getHeuristicStatsTime().g <= n->getHeuristicStatsTime().g) {
            return;
        }
-        // TODO: fix with two heuristicStats
     }
 
     nodes_[id] = n;
@@ -24,11 +23,9 @@ bool MapSetOpen::isEmpty() const {
 }
 
 NodePtr MapSetOpen::getBest() {
-    auto it = heap_.begin();
-    heap_.erase(it);
-
-    nodes_.erase((*it)->getVertex().id);
-    return *it;
+    auto it = heap_.extract(heap_.begin()).value();
+    nodes_.erase(it->getVertex().id);
+    return it;
 }
 
 void MapSetOpen::clear() {
