@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 project(search_algorithms)
 
 find_package( Boost 1.40 COMPONENTS program_options REQUIRED )
@@ -14,6 +14,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/AlgorithmSet.hpp
                               Service/AlgorithmSet.cpp
                               Algorithm/DummyAlgorithm.hpp
-                              Algorithm/DummyAlgorithm.cpp)
+                              Algorithm/DummyAlgorithm.cpp
+                              Service/Graph.hpp
+                              Service/Graph.cpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )
