@@ -21,8 +21,8 @@ public:
 
     Vertex getVertex() const;
     Position getPos() const;
-    HeuristicStats getHeuristicStats1() const;
-    HeuristicStats getHeuristicStats2() const;
+    HeuristicStats getHeuristicStatsDist() const;
+    HeuristicStats getHeuristicStatsTime() const;
     const Node *getParent() const;
 
     Node extend(const Edge& edge, const Graph& graph, float hDist, float hTime) const;

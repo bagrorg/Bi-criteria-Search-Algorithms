@@ -16,11 +16,11 @@ Position Node::getPos() const {
     return v_.position;
 }
 
-HeuristicStats Node::getHeuristicStats1() const {
+HeuristicStats Node::getHeuristicStatsDist() const {
     return hsDist_;
 }
 
-HeuristicStats Node::getHeuristicStats2() const {
+HeuristicStats Node::getHeuristicStatsTime() const {
     return hsTime_;
 }
 
