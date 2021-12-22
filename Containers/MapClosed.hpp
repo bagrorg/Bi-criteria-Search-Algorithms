@@ -6,11 +6,11 @@
 #include "Closed.hpp"
 #include "Service/PairHash.hpp"
 
-class MapClosed : public Closed<Node> {
+class MapClosed : public Closed<NodePtr> {
 public:
     size_t size() const override;
-    void add(Node n) override;
-    bool wasExpanded(const Node& n) const override;
+    void add(NodePtr n) override;
+    bool wasExpanded(const NodePtr& n) const override;
 private:
-    std::unordered_map<int, Node> nodes_;
+    std::unordered_map<int, NodePtr> nodes_;
 };
