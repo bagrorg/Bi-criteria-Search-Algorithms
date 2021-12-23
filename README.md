@@ -1,16 +1,13 @@
 # Bi-criteria-Search-Algorithms
+A software project at the SPbU.
 
 ## Description 
 
-A project at the SPbU. Pathfinding algorithms.
 
-This project uses
 
-+ [Boost](https://www.boost.org/) - for parsing arguments
-+ [Pillow](https://pypi.org/project/Pillow/) - for visualizing with Python
+
 
 ## Getting started
-
 For project build you should have compiler on C++17 standart.
 For example, you can install it with 
 ```
@@ -27,6 +24,12 @@ For example, you can install it with
 sudo apt install libboost-all-dev   
 ```
 
+Also you will need Python3.8
+
+For Python you will need `tqdm` and `Pil`. You can install all dependencies from `requirements.txt` with
+```
+pip install -r requirements.txt
+```
 
 
 ## Installing
@@ -100,7 +103,7 @@ a {vertex from} {vertex to} {time cost} {distance cost}
 ```
 Indexing of vertices must starts from 0!
 
-You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Graphs).
+You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Graphs). Also you can find `.gr/.co` files on 9th DIMACS Implementation Challenge: ShortestPath. Check [Sources](#sources) for more information.
 
 ## Scripts
 + `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`. Indexing must starts from 1.
@@ -118,7 +121,7 @@ Indexing must starts from 0.
 ## Sources
 + Hernández Ulloa, C., Yeoh, W., Baier, J. A., Zhang, H., Suazo, L., & Koenig, S. (2020). A Simple and Fast Bi-Objective Search Algorithm. [URL](https://ojs.aaai.org//index.php/ICAPS/article/view/6655)
 + Goldin, B., & Salzman, O. (2021). Approximate Bi-Criteria Search by Efficient Representation of Subsets of the Pareto-Optimal Frontier. [URL](https://ojs.aaai.org/index.php/ICAPS/article/view/15957)
-
++ 9th DIMACS Implementation Challenge: ShortestPath. [URL](http://users.diag.uniroma1.it/challenge9/download.shtml)
 ## Participants
 ### Mentor
 Yakovlev Konstantin Sergeevich
