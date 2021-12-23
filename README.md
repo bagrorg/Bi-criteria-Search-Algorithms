@@ -101,14 +101,14 @@ Indexing of vertices must starts from 0!
 You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Graphs).
 
 ## Scripts
-+ `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`
++ `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`. Indexing must starts from 1.
 
 
 + `dijkstra.py {input graph path} {output path} {vertex id}` - counting dijkstra results (for heuristics) using graph at `{input graph path}` for `{vertex id}` vertex and saving it at `{output path}` in format
 ```
 {vertex id} {result}
 ```
-
-+ `renderHistory.py {history path} {graph path} {output path} {start id} {goal id} {duration} {max frames}` - making a gif from hastory file at `{history path}` using graph at `{graph path}` and saving it at `{output path}`. History is for path starting at `{start id}` and ending at `{goal id}`. `{duration}` and `{max frames}` - settings for gif output. Can be `-1` for default.
+Indexing must starts from 0.
++ `renderHistory.py {history path} {graph path} {output path} {start id} {goal id} {duration} {max frames}` - making a gif from hastory file at `{history path}` using graph at `{graph path}` and saving it at `{output path}`. History is for path starting at `{start id}` and ending at `{goal id}`. `{duration}` and `{max frames}` - settings for gif output. Can be `-1` for default. Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
