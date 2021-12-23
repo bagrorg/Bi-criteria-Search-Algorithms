@@ -85,7 +85,6 @@ p sp {count of vertices} {count of edges}
 
 v {vertex index} {x} {y}
 ```
-You can find examples in ...
 
 After this, you can merge this files to one with script `mergeGraphFiles.py`. To check how to use this script see [Scripts](Scripts). This file you will need for execution
 
@@ -99,7 +98,7 @@ a {vertex from} {vertex to} {time cost} {distance cost}
 ```
 Indexing of vertices must starts from 0!
 
-You can find examples in ...
+You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Graphs).
 
 ## Scripts
 + `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`
