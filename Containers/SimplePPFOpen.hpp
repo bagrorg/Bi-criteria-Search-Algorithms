@@ -22,12 +22,13 @@ public:
 
     bool isDominated(const PPF &pair, int goalId, bool newPair) override;
 
-    std::vector<Node> getAllNodes() override;
+    std::vector<Node> getAddedNodes() override;
 
 private:
     std::set<PPF> set_;
     std::unordered_map<int, std::list<PPF>> pairs_;
     std::unordered_map<int, float> gTimeMin_;
+    std::vector<Node> added_;
 
     float gMin(int id);
 };

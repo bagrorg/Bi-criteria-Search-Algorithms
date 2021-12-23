@@ -28,11 +28,13 @@ void SimplePPFOpen::add(PPF n) {
             pairs.erase(iter);
             set_.insert(newPair);
             pairs.push_back(newPair);
+            added_.push_back(*newPair.getTlNode());
             return;
         }
     }
     set_.insert(n);
     pairs.push_back(n);
+    added_.push_back(*n.getTlNode());
 }
 
 bool SimplePPFOpen::isEmpty() const {
@@ -51,11 +53,8 @@ float SimplePPFOpen::gMin(int id) {
     return gTimeMin_.find(id) == gTimeMin_.end() ? std::numeric_limits<float>::infinity() : gTimeMin_[id];
 }
 
-std::vector<Node> SimplePPFOpen::getAllNodes() {
-    std::vector<Node> result;
-    result.reserve(set_.size());
-    for (const auto& pair: set_) {
-        result.push_back(*pair.getTlNode());
-    }
-    return result;
+std::vector<Node> SimplePPFOpen::getAddedNodes() {
+    auto res = added_;
+    added_.clear();
+    return res;
 }

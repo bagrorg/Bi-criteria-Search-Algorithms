@@ -1,9 +1,12 @@
 import sys
 from PIL import Image, ImageDraw
+from tqdm import tqdm
 
 file_history_name = sys.argv[1]
 file_graph_name = sys.argv[2]
 file_output_name = sys.argv[3]
+start_id = int(sys.argv[4])
+goal_id = int(sys.argv[5])
 
 history = []
 nodes = []
@@ -46,7 +49,7 @@ with open(file_history_name, 'r') as file_history:
             pred = None
             for id_ in map(int, line.strip().split()[1:]):
                 ids.append(id_)
-            if line[0] == 'p':
+            if line[0] == 'n':
                 history[-1][0].append(ids)
             else:
                 history[-1][1].append(ids)
@@ -84,27 +87,47 @@ images = []
 default_color = 'grey'
 open_path_color = 'orange'
 solution_color = 'green'
-for open_paths, solutions_paths in [([], [])] + history:
-    im = Image.new('RGB', (w, h), color='white')
+
+images.append(Image.new('RGB', (w, h), color='white'))
+draw_base = ImageDraw.Draw(images[0])
+
+for u, v in edges:
+    x, y = nodes[u]
+    x, y = transform(x, y)
+    x2, y2 = nodes[v]
+    x2, y2 = transform(x2, y2)
+    draw_edge(draw_base, x, y, x2, y2, default_color)
+
+for x, y in nodes:
+    x, y = transform(x, y)
+    draw_node(draw_base, x, y, 'black')
+
+for x, y in [nodes[start_id], nodes[goal_id]]:
+    x, y = transform(x, y)
+    sz = 1
+    draw_base.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
+
+all_solutions = []
+group = 50
+cur = 0
+for open_paths, solutions_paths in tqdm(history):
+    cur = (cur + 1) % group
+    if cur == 0:
+        im = images[-1].copy()
+    else:
+        im = images[-1]
     draw_im = ImageDraw.Draw(im)
-
-    for u, v in edges:
-        x, y = nodes[u]
-        x, y = transform(x, y)
-        x2, y2 = nodes[v]
-        x2, y2 = transform(x2, y2)
-        draw_edge(draw_im, x, y, x2, y2, default_color)
-
-    for x, y in nodes:
-        x, y = transform(x, y)
-        draw_node(draw_im, x, y, 'black')
 
     for cur_path in open_paths:
         draw_path(draw_im, cur_path, open_path_color)
 
-    for cur_path in solutions_paths:
+    all_solutions.extend(solutions_paths)
+    for cur_path in all_solutions:
         draw_path(draw_im, cur_path, solution_color)
+    if cur == 0:
+        images.append(im)
 
-    images.append(im)
+for _ in range(60):
+    images.append(images[-1].copy())
 
-images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=True, duration=200, loop=0)
+images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=False, duration=50, loop=0)

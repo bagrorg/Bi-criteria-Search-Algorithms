@@ -1,18 +1,20 @@
 #include <Containers/SimplePPFOpen.hpp>
 #include "AlgorithmSet.hpp"
+#include "HeuristicFunction.hpp"
 
-void build(AlgorithmSet &as) {
+void build(AlgorithmSet &as, const Options& opts) {
+    auto hTime = buildHeuristicFunction(opts.hTimeFile);
+    auto hDist = buildHeuristicFunction(opts.hDistFile);
+
     as["DummyAlgorithm"] = std::make_shared<DummyAlgorithm>();
     as["PP-A*"] = std::make_shared<PPA>(
         std::make_unique<SimplePPFOpen>(),
         std::make_unique<SimplePPFOpen>(),
-        [](int) { return 0.f; },
-        [](int) { return 0.f; }
+        hDist, hTime
     );
     as["BOA*"] = std::make_shared<BOA>(
         std::make_unique<MapSetOpen>(),
         std::make_unique<MapSetOpen>(),
-        [](int) { return 0.f; },
-        [](int) { return 0.f; }
+        hDist, hTime
     );
 }

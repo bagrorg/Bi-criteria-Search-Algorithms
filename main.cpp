@@ -8,9 +8,6 @@ using namespace std;
 namespace po = boost::program_options;
 
 int main(int argc, char** argv) {
-    AlgorithmSet as;
-    build(as);
-
     // Declare the supported options.
     po::options_description desc("Allowed options");
     desc.add_options()
@@ -24,6 +21,8 @@ int main(int argc, char** argv) {
         ("start_id", po::value<int>(), "id of start")
         ("goal_id", po::value<int>(), "id of goal")
         ("history_path", po::value<std::string>(), "path to history")
+        ("h_time_path", po::value<std::string>(), "path to heuristic by time")
+        ("h_dist_path", po::value<std::string>(), "path to heuristic by distance")
     ;
     
     po::variables_map vm;
@@ -35,9 +34,13 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+
+    Options opts = optionsFromInput(vm);
+    AlgorithmSet as;
+    build(as, opts);
+
     if (vm.count("algo")) {
         auto a = as[vm["algo"].as<std::string>()];
-        Options opts = optionsFromInput(vm);
 
         a->runAlgorithm(opts);
         a->writeReport(opts);

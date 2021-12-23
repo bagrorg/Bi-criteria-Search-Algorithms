@@ -61,7 +61,7 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
 
 void PPA::updateHistory() {
     history_.push_back({
-        open_->getAllNodes(),
-        solutions_->getAllNodes()
+        open_->getAddedNodes(),
+        solutions_->getAddedNodes()
     });
 }
