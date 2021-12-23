@@ -38,6 +38,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/AlgorithmState.cpp
                               Service/AlgorithmState.hpp
                               Algorithm/BOA.hpp
-                              Algorithm/BOA.cpp)
+                              Algorithm/BOA.cpp
+                              Service/BOANode.hpp
+                              Service/BOANode.cpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )
