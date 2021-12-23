@@ -68,8 +68,11 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
     std::map<std::string, std::string> res_local = {
         {"count_of_iterations", std::to_string(countOfIterations)},
         {"count_of_expansions", std::to_string(countOfExpansions)},
-        {"time", std::to_string(exec_time.count())},
-        {"solution_size", std::to_string(solutions_->size())}
+        {"time_us", std::to_string(exec_time.count() / 1000)},
+        {"solution_size", std::to_string(solutions_->size())},
+        {"time_epsilon", std::to_string(opts.epsTime)},
+        {"dist_epsilon", std::to_string(opts.epsDist)},
+        {"algo", "PP-A*"}
     };
     res_.push_back(res_local);
     solutionPaths_ = solutions_->getAllNodes();
