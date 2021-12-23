@@ -87,7 +87,7 @@ c {comments}
 v {vertex index} {x} {y}
 ```
 
-After this, you can merge this files to one with script `mergeGraphFiles.py`. To check how to use this script see [Scripts](## Scripts). This file you will need for execution
+After this, you can merge this files to one with script `mergeGraphFiles.py`. To check how to use this script see [Scripts](##scripts). This file you will need for execution
 
 ### 1 file
 + file with time, distance and coordinates
