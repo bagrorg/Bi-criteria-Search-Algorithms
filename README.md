@@ -3,6 +3,7 @@ A software project at the SPbU.
 
 ## Description 
 This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
+
 ![vis](./Images/nyc.gif)
 
 
