@@ -7,8 +7,10 @@ file_graph_name = sys.argv[2]
 file_output_name = sys.argv[3]
 start_id = int(sys.argv[4])
 goal_id = int(sys.argv[5])
-max_frames = int(sys.argv[6])
-duration = 200
+duration = int(sys.argv[6])
+max_frames = int(sys.argv[7])
+if duration == -1:
+    duration = 200
 
 history = []
 nodes = []

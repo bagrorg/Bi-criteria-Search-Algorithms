@@ -3,6 +3,7 @@ import numpy as np
 from serviceForDijkstra import *
 import sys
 
+
 def ReadTaskFromFile(path):
     '''
     Reads map, start/goal positions and true value of path length between given start and goal from file by path. 
@@ -24,6 +25,7 @@ def ReadTaskFromFile(path):
     file.close()
     return g
 
+
 def Dijkstra(graph, idStart, openType = Open, closedType = Closed):
     OPEN = openType()
     CLOSED = closedType()
@@ -38,9 +40,7 @@ def Dijkstra(graph, idStart, openType = Open, closedType = Closed):
             new_neigh = Node(pos.to, g=(st.g + pos.cost), parent=st)
             if not CLOSED.WasExpanded(new_neigh):
                 OPEN.AddNode(new_neigh)
-    
-
-    return (True, None, CLOSED, OPEN)
+    return True, None, CLOSED, OPEN
 
 
 file_name = sys.argv[1]
