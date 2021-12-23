@@ -40,7 +40,7 @@ file_dist.close()
 
 res_file = open(file_output_name, 'w')
 
-res_file.write('p sp ' + str(v_count) + ' ' + str(a_count))
+res_file.write('p sp ' + str(v_count) + ' ' + str(a_count) + '\n')
 
 for v in vertexes:
     res_file.write('v ' + str(v - 1) + ' ' + str(vertexes[v][0]) + ' ' + str(vertexes[v][1]) + '\n')

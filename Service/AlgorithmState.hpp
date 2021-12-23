@@ -4,8 +4,8 @@
 #include "Options.hpp"
 
 struct AlgorithmState {
-    std::vector<Node> openNodes;
-    std::vector<Node> solutions;
+    std::vector<Node> addedNodes;
+    std::vector<Node> addedSolutions;
 };
 
 using AlgorithmStateHistory = std::vector<AlgorithmState>;
