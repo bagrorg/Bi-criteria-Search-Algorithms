@@ -105,13 +105,20 @@ You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algor
 
 ### Output files
 
-+ history file - contains all OPEN states while an execution
++ history file - contains all OPEN or solutions updates while an execution
+Format:
+```
+e {num of epoch (iteration)}
 
+n {nodes that was added on this iteration}
+
+s {solution that was added on this iteration}
+```
 + gif - gif file of working process
 
 + solutions - Paretto-optimal frontier
 
-Examples [here](todo)
+Examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Output)
 ## Scripts
 + `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`. Indexing must starts from 1.
 
