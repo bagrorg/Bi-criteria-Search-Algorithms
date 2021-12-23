@@ -52,7 +52,7 @@ make -j nproc
 You can manage settings of execution using arguments.
 
 + `algo` - wich algorithm to use. Now supported - BOA*, BOA*-epsilon and PP-A* (to use BOA*-epsilon just use BOA* and pass epsilons)
-+ `report_path` - where to save execution description
++ `report_path` - where to save execution description (empty right now)
 + `graph_path` - path to graph description file
 + `iterations` - how much executions to provide
 + `eps_dist`, `eps_time` - epsilons for PP-A* and BOA*-epsilon algorithms for distance cost and time cost
