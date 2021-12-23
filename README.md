@@ -145,6 +145,7 @@ Example
 ```
 ./run.sh ../Data/USA-road-t.NY.gr ../Data/USA-road-d.NY.gr ../Data/USA-road-d.NY.co ../Data/Res.gr ../Data/timeHeur.txt ../Data/distHeur.txt 10 15 ../build/main PP-A* 0.25 0.25 ../Data/Hist.txt
 ```
+Notice that to run without epsilons but with history you need to set epsilons to 0.
 ## Sources
 + Hernández Ulloa, C., Yeoh, W., Baier, J. A., Zhang, H., Suazo, L., & Koenig, S. (2020). A Simple and Fast Bi-Objective Search Algorithm. [URL](https://ojs.aaai.org//index.php/ICAPS/article/view/6655)
 + Goldin, B., & Salzman, O. (2021). Approximate Bi-Criteria Search by Efficient Representation of Subsets of the Pareto-Optimal Frontier. [URL](https://ojs.aaai.org/index.php/ICAPS/article/view/15957)
