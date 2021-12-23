@@ -1,0 +1,4 @@
+c This is an example. Vertices idxs starts from 1.
+v 1 10 10
+v 2 11 11
+v 3 21 21
