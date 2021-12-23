@@ -132,6 +132,15 @@ Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
 
++ `run.sh {time graph input} {dist graph input} {coordinates graph input} {path to result graph} {path to time heuristics} {path to distance heuristics} {start idx} {goal idx} {path to built main program} {algorithm name} {history path} {epsilon time} {epsilon dist}` - main script that runs program on input graph
+  + `{time graph input}`, `{dist graph input}`, `{coordinates graph input}` - paths to input files
+  + `{path to result graph}`, `{path to time heuristics}`, `{path to distance heuristics}` - paths to output files
+  + `{start idx}`, `{goal idx}` - vertexes indexes
+  + `{path to built main program}` - path to c++ built program
+  + `{algorithm name}` - algorithm (e.g. `BOA*`)
+  + `{history path}` - path to history output (optional)
+  + `{epsilon time}`, `{epsilon dist}` - epsilons (optional)
+
 ## Sources
 + Hernández Ulloa, C., Yeoh, W., Baier, J. A., Zhang, H., Suazo, L., & Koenig, S. (2020). A Simple and Fast Bi-Objective Search Algorithm. [URL](https://ojs.aaai.org//index.php/ICAPS/article/view/6655)
 + Goldin, B., & Salzman, O. (2021). Approximate Bi-Criteria Search by Efficient Representation of Subsets of the Pareto-Optimal Frontier. [URL](https://ojs.aaai.org/index.php/ICAPS/article/view/15957)
