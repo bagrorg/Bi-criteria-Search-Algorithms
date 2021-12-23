@@ -43,14 +43,18 @@ def Dijkstra(graph, idStart, openType = Open, closedType = Closed):
     return True, None, CLOSED, OPEN
 
 
-file_name = sys.argv[1]
-file_to = sys.argv[2]
-start_id = int(sys.argv[3])
+def main(arg1, arg2, arg3):
+    file_name = arg1
+    file_to = arg2
+    start_id = int(arg3)
 
-g = ReadTaskFromFile(file_name)
-_, _, CLOSED, _ = Dijkstra(g, start_id)
-file = open(file_to, 'w')
+    g = ReadTaskFromFile(file_name)
+    _, _, CLOSED, _ = Dijkstra(g, start_id)
+    file = open(file_to, 'w')
 
-for k in CLOSED.nodes:
-    file.write(str(CLOSED.nodes[k].id) + ' ' + str(CLOSED.nodes[k].g) + '\n')
-file.close()
+    for k in CLOSED.nodes:
+        file.write(str(CLOSED.nodes[k].id) + ' ' + str(CLOSED.nodes[k].g) + '\n')
+    file.close()
+
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2], sys.argv[3])

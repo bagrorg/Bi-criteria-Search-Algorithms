@@ -1,4 +1,5 @@
 #include "PPA.hpp"
+#include <chrono>
 
 PPA::PPA(std::unique_ptr<PPFOpen> open, std::unique_ptr<PPFOpen> solutions,
          std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc)
@@ -26,6 +27,8 @@ void PPA::runAlgorithm(const Options &opts) {
 
 void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
     bool writeHistory = !opts.historyFile.empty();
+    long countOfExpansions = 0;
+    long countOfIterations = 0;
 
     {
         float hDist = hDistFunc_(opts.startId);
@@ -38,8 +41,9 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
         open_->add(PPF(opts.startId, startNode, startNode));
         if (writeHistory) updateHistory();
     }
-
+    auto host_start = std::chrono::steady_clock::now();
     while (!open_->isEmpty()) {
+        countOfIterations++;
         PPF pair = open_->getBest();
 
         if (open_->isDominated(pair, opts.goalId, false)) continue;
@@ -53,10 +57,21 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
             float hTime = hTimeFunc_(edge.to_id);
             PPF newPair = pair.extend(edge, graph, hDist, hTime);
             if (open_->isDominated(newPair, opts.goalId, true)) continue;
+            countOfExpansions++;
             open_->add(std::move(newPair));
         }
         if (writeHistory) updateHistory();
     }
+    auto host_end = std::chrono::steady_clock::now();
+    auto exec_time = host_end - host_start;
+
+    std::map<std::string, std::string> res_local = {
+        {"count_of_iterations", std::to_string(countOfIterations)},
+        {"count_of_expansions", std::to_string(countOfExpansions)},
+        {"time", std::to_string(exec_time.count())},
+        {"solution_size", std::to_string(solutions_->size())}
+    };
+    res_.push_back(res_local);
     solutionPaths_ = solutions_->getAllNodes();
 }
 

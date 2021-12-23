@@ -1,5 +1,6 @@
 #include "BOA.hpp"
 #include "Service/BOANode.hpp"
+#include <chrono>
 
 BOA::BOA(std::unique_ptr<MapSetOpen> open, std::unique_ptr<MapSetOpen> solutions,
          std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc)
@@ -43,6 +44,9 @@ bool BOA::isDominated(const BOANode& node, int goalId, float epsTime) {
 }
 
 void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
+    long countOfExpansions = 0;
+    long countOfIterations = 0;
+
     {
         float hDist = hDistFunc_(opts.startId);
         float hTime = hTimeFunc_(opts.startId);
@@ -55,8 +59,9 @@ void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
         open_->add(st);
         if (writeHistory) updateHistory();
     }
-
+    auto host_start = std::chrono::steady_clock::now();
     while (!open_->isEmpty()) {
+        countOfIterations++;
         auto best = open_->getBest();
 
         if (isDominated(best, opts.goalId, opts.epsTime)) continue;
@@ -72,9 +77,21 @@ void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
             float hTime = hTimeFunc_(edge.to_id);
             auto newNode = best.extend(edge, graph, hDist, hTime);
             if (isDominated(newNode, opts.goalId, opts.epsTime)) continue;
+            countOfExpansions++;
             open_->add(std::move(newNode));
         }
         if (writeHistory) updateHistory();
     }
+    auto host_end = std::chrono::steady_clock::now();
+    auto exec_time = host_end - host_start;
+
+    std::map<std::string, std::string> res_local = {
+        {"count_of_iterations", std::to_string(countOfIterations)},
+        {"count_of_expansions", std::to_string(countOfExpansions)},
+        {"time_us", std::to_string(exec_time.count() / 1000)},
+        {"solution_size", std::to_string(solutions_->size())}
+    };
+    res_.push_back(res_local);
+
     solutionPaths_ = solutions_->getAllNodes();
 }
