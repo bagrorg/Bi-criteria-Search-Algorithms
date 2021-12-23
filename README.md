@@ -121,7 +121,7 @@ Examples [here](todo)
 {vertex id} {result}
 ```
 Indexing must starts from 0.
-+ `renderHistory.py {history path} {graph path} {output path} {start id} {goal id} {duration} {max frames}` - making a gif from hastory file at `{history path}` using graph at `{graph path}` and saving it at `{output path}`. History is for path starting at `{start id}` and ending at `{goal id}`. `{duration}` and `{max frames}` - settings for gif output. Can be `-1` for default. Indexing must starts from 0.
++ `renderHistory.py {history path} {graph path} {output path} {start id} {goal id} {duration} {max frames} {width} {height}` - making a gif from hastory file at `{history path}` using graph at `{graph path}` and saving it at `{output path}`. History is for path starting at `{start id}` and ending at `{goal id}`. `{duration}`, `{max frames}`, `{height}` and `{width}` - settings for gif output. Can be `-1` for default. Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
 
