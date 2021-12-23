@@ -85,11 +85,6 @@ void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
     auto host_end = std::chrono::steady_clock::now();
     auto exec_time = host_end - host_start;
 
-    std::string algo_name = "BOA*";
-    if (opts.epsDist != 0 || opts.epsTime != 0) {
-        algo_name += "-epsilon";
-    }
-
     std::map<std::string, std::string> res_local = {
         {"count_of_iterations", std::to_string(countOfIterations)},
         {"count_of_expansions", std::to_string(countOfExpansions)},
@@ -97,7 +92,7 @@ void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
         {"solution_size", std::to_string(solutions_->size())},
         {"time_epsilon", std::to_string(opts.epsTime)},
         {"dist_epsilon", std::to_string(opts.epsDist)},
-        {"algo", algo_name}
+        {"algo", "BOA*"}
     };
     res_.push_back(res_local);
 

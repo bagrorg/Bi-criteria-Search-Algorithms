@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "0, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0 --eps_dist 0 --report_path ../Reports/report.csv
+echo "0.01, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0.01 --eps_dist 0.01 --report_path ../Reports/report.csv
+echo "0.025, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0.025 --eps_dist 0.025 --report_path ../Reports/report.csv
+echo "0.05, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0.05 --eps_dist 0.05 --report_path ../Reports/report.csv
+echo "0.1, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0.1 --eps_dist 0.1 --report_path ../Reports/report.csv
+echo "0.2, BOA*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0.2 --eps_dist 0.2 --report_path ../Reports/report.csv
+
+echo "0, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0 --eps_dist 0 --report_path ../Reports/report.csv
+echo "0.01, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0.01 --eps_dist 0.01 --report_path ../Reports/report.csv
+echo "0.025, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0.025--eps_dist 0.025 --report_path ../Reports/report.csv
+echo "0.05, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0.05 --eps_dist 0.05 --report_path ../Reports/report.csv
+echo "0.1, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0.1 --eps_dist 0.1 --report_path ../Reports/report.csv
+echo "0.2, PP-A*"
+python3.9 ../Scripts/run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path LocalData/Res.gr --time_heuristic_path LocalData/timeHeur.txt --dist_heuristic_path LocalData/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name PP-A* --eps_time 0.2 --eps_dist 0.2 --report_path ../Reports/report.csv
