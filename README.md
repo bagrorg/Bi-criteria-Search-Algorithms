@@ -63,7 +63,7 @@ Also you can run explanation with
 ```
 
 ## Input and output
-### 3 sepparate files
+### 3 sepparate input graph files
 For input there must be 3 files:
 + file with time cost
 + file with distance cost
@@ -90,7 +90,7 @@ v {vertex index} {x} {y}
 
 After this, you can merge this files to one with script `mergeGraphFiles.py`. To check how to use this script see [Scripts](#scripts). This file you will need for execution
 
-### 1 file
+### 1 input graph file
 + file with time, distance and coordinates
 Lines must be
 ```
@@ -103,6 +103,15 @@ Indexing of vertices must starts from 0!
 
 You can find examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Graphs). Also you can find `.gr/.co` files on 9th DIMACS Implementation Challenge: ShortestPath. Check [Sources](#sources) for more information.
 
+### Output files
+
++ history file - contains all OPEN states while an execution
+
++ gif - gif file of working process
+
++ solutions - Paretto-optimal frontier
+
+Examples [here](todo)
 ## Scripts
 + `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`. Indexing must starts from 1.
 
