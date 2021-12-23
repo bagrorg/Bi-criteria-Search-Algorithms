@@ -16,9 +16,8 @@ public:
     bool isEmpty() const override;
     BOANode getBest() override;
     void clear() override;
-    std::vector<Node> getAllNodes();
-    size_t size2() const;
+    std::vector<Node> getAddedNodes();
 private:
     std::set<BOANode> heap_;
-    std::unordered_map<int, BOANode> nodes_;
+    std::vector<Node> added_;
 };

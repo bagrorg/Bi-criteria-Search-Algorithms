@@ -15,10 +15,7 @@ BOANode BOANode::extend(const Edge &edge, const Graph& graph, float hDist, float
     );
 }
 
-bool BOANode::operator==(const BOANode& other) const {
-    return *node_ == *other.node_;
-}
-
 bool BOANode::operator<(const BOANode& other) const {
-    return *node_ < *other.node_;
+    return std::make_tuple(node_->getHeuristicStatsDist().F, node_->getHeuristicStatsTime().F, id_) <
+           std::make_tuple(other.node_->getHeuristicStatsDist().F, other.node_->getHeuristicStatsTime().F, other.id_);
 }

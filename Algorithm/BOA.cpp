@@ -31,9 +31,15 @@ void BOA::setGMin(int id, float newG) {
 
 void BOA::updateHistory() {
     history_.push_back({
-        open_->getAllNodes(),
-        solutions_->getAllNodes()
+        open_->getAddedNodes(),
+        solutions_->getAddedNodes()
     });
+}
+
+bool BOA::isDominated(const BOANode& node, int goalId) {
+    bool dominatedByNode = node.getNode()->getHeuristicStatsTime().g >= gMin(node.getId());
+    bool dominatedBySolution = node.getNode()->getHeuristicStatsTime().F >= gMin(goalId);
+    return dominatedBySolution || dominatedByNode;
 }
 
 void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
@@ -52,10 +58,8 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
 
     while (!open_->isEmpty()) {
         auto best = open_->getBest();
-        std::cout << best.getId() << std::endl;
 
-        if (best.getNode()->getHeuristicStatsTime().g >= gMin(best.getId()) || 
-            best.getNode()->getHeuristicStatsTime().F >= gMin(goalId)) continue;
+        if (isDominated(best, goalId)) continue;
         setGMin(best.getId(), best.getNode()->getHeuristicStatsTime().g);
         if (best.getId() == goalId) {
             solutions_->add(best);
@@ -67,11 +71,9 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
             auto newNode = best.extend(edge, graph, hDist, hTime);
-            if (newNode.getNode()->getHeuristicStatsTime().g >= gMin(newNode.getId()) || 
-                newNode.getNode()->getHeuristicStatsTime().F >= gMin(goalId)) continue;
+            if (isDominated(newNode, goalId)) continue;
             open_->add(std::move(newNode));
         }
         if (writeHistory) updateHistory();
-        
     }
 }

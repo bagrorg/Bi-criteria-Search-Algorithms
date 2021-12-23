@@ -17,6 +17,7 @@ private:
     void runAlgorithmImpl(const Graph &graph, int startId, int goalId);
     float gMin(int id);
     void setGMin(int id, float newG);
+    bool isDominated(const BOANode& node, int goalId);
 
     void updateHistory();
 
