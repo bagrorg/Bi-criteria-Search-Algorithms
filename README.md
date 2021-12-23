@@ -4,7 +4,7 @@ A software project at the SPbU.
 ## Description 
 This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
 
-<img src="/Images/nyc2.gif" width="700" height="150"/>
+<img src="/Images/nyc.gif" width="700" height="150"/>
 
 
 ## Getting started
@@ -125,8 +125,15 @@ Format
 s {dist} {time}
 p {path}
 ```
-
 Examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Output)
+
+### Misc
++ heuristics (from `dijkstra.py`)
+Format
+```
+{vertex id} {heuristic}
+```
+
 ## Scripts
 + `mergeGraphFiles.py {time path} {dist path} {coord path} {output path}` - merging 3 graph files at `{time path}`, `{dist path}` and `{coord path}` to one at `{output path}`. Indexing must starts from 1.
 
