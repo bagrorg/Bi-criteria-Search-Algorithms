@@ -40,12 +40,12 @@ git clone https://github.com/bagrorg/Bi-criteria-Search-Algorithms
 ```
 
 To build the project follow the guide
-```
-~$  cd Bi-criteria-Search-Algorithms/
-~$  mkdir build
-~$  cd build
-~$  cmake ..
-~$  make -j nproc
+```cmd
+cd Bi-criteria-Search-Algorithms/
+mkdir build
+cd build
+cmake ..
+make -j nproc
 ```
 
 ## Arguments
