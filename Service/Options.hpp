@@ -17,6 +17,7 @@ struct Options {
     std::string historyFile;
     std::string hTimeFile;
     std::string hDistFile;
+    std::string solutionFile = "solutions.txt";
 };
 
 Options optionsFromInput(const po::variables_map &vm);

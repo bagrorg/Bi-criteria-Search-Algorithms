@@ -40,6 +40,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/BOANode.hpp
                               Service/BOANode.cpp
                               Service/HeuristicFunction.hpp
-                              Service/HeuristicFunction.cpp)
+                              Service/HeuristicFunction.cpp
+                              Service/Solutions.cpp
+                              Service/Solutions.hpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )

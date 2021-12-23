@@ -17,6 +17,7 @@ public:
     BOANode getBest() override;
     void clear() override;
     std::vector<Node> getAddedNodes();
+    std::vector<Node> getAllNodes();
 private:
     std::set<BOANode> heap_;
     std::vector<Node> added_;

@@ -58,3 +58,12 @@ std::vector<Node> SimplePPFOpen::getAddedNodes() {
     added_.clear();
     return res;
 }
+
+std::vector<Node> SimplePPFOpen::getAllNodes() {
+    std::vector<Node> res;
+    res.reserve(set_.size());
+    for (const auto& pair : set_) {
+        res.push_back(*pair.getTlNode());
+    }
+    return res;
+}
