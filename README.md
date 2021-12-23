@@ -73,6 +73,7 @@ Format:
 + file with time/distance cost
 Lines must be like
 ```
+c {comments}
 p sp {count of vertices} {count of edges}
 
 a {vertex from} {vertex to} {time/distance cost}
@@ -81,7 +82,7 @@ a {vertex from} {vertex to} {time/distance cost}
 + file with coordinates
 Lines must be like
 ```
-p sp {count of vertices} {count of edges}
+c {comments}
 
 v {vertex index} {x} {y}
 ```
@@ -92,6 +93,7 @@ After this, you can merge this files to one with script `mergeGraphFiles.py`. To
 + file with time, distance and coordinates
 Lines must be
 ```
+c {comments}
 p sp {count of vertices} {count of edges}
 v {vertex index} {x} {y}
 a {vertex from} {vertex to} {time cost} {distance cost}
