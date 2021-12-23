@@ -149,6 +149,18 @@ for open_paths, solutions_paths in tqdm(history):
         sz = 1
         draw_im.rectangle((x - sz, y - sz, x + sz, y + sz), fill='red')
 
+draw_im = ImageDraw.Draw(images[-1])
+for cur_path in all_solutions:
+    draw_path(draw_im, cur_path, solution_color)
+x, y = nodes[start_id]
+x, y = transform(x, y)
+sz = 1
+draw_im.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
+x, y = nodes[goal_id]
+x, y = transform(x, y)
+sz = 1
+draw_im.rectangle((x - sz, y - sz, x + sz, y + sz), fill='red')
+
 for _ in range(3000 // duration):
     images.append(images[-1].copy())
 
