@@ -4,7 +4,7 @@ A software project at the SPbU.
 ## Description 
 This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
 
-![vis](./Images/nyc.gif)
+![vis](./Images/nyc2.gif)
 
 
 ## Getting started
@@ -120,6 +120,11 @@ s {solution that was added on this iteration}
 + gif - gif file of working process
 
 + solutions - Paretto-optimal frontier
+Format
+```
+s {dist} {time}
+p {path}
+```
 
 Examples [here](https://github.com/bagrorg/Bi-criteria-Search-Algorithms/tree/master/Examples/Output)
 ## Scripts
