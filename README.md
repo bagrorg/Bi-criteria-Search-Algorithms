@@ -2,9 +2,7 @@
 A software project at the SPbU.
 
 ## Description 
-
-
-
+This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
 
 
 ## Getting started
@@ -51,11 +49,11 @@ make -j nproc
 ## Arguments
 You can manage settings of execution using arguments.
 
-+ `algo` - wich algorithm to use. Now supported - BOA* and PP-A*.
++ `algo` - wich algorithm to use. Now supported - BOA*, BOA*-epsilon and PP-A* (to use BOA*-epsilon just use BOA* and pass epsilons)
 + `report_path` - where to save execution description
 + `graph_path` - path to graph description file
 + `iterations` - how much executions to provide
-+ `eps_dist`, `eps_time` - epsilons for PP-A* algorithms for distance cost and time cost
++ `eps_dist`, `eps_time` - epsilons for PP-A* and BOA*-epsilon algorithms for distance cost and time cost
 + `start_id`, `goal_id` - indexes of start and goal vertexes
 + `history_path` - where to save history of OPEN and CLOSEd
 
