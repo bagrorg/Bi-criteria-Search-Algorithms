@@ -56,6 +56,7 @@ You can manage settings of execution using arguments.
 + `eps_dist`, `eps_time` - epsilons for PP-A* and BOA*-epsilon algorithms for distance cost and time cost
 + `start_id`, `goal_id` - indexes of start and goal vertexes
 + `history_path` - where to save history of OPEN and CLOSEd
++ `h_time_path`, `h_dist_path` - path to heuristic files (e.g. dijkstra results)
 
 Also you can run explanation with 
 ```
