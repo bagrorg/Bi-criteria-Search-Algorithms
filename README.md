@@ -4,6 +4,8 @@ A software project at the SPbU.
 ## Description 
 This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
 
+![vis](./Images/nyc.gif)
+
 
 ## Getting started
 For project build you should have compiler on C++17 standart.
