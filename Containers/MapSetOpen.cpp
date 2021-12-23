@@ -28,3 +28,12 @@ std::vector<Node> MapSetOpen::getAddedNodes() {
     added_.clear();
     return res;
 }
+
+std::vector<Node> MapSetOpen::getAllNodes() {
+    std::vector<Node> res;
+    res.reserve(heap_.size());
+    for (const auto& nodePtr : heap_) {
+        res.push_back(*nodePtr.getNode());
+    }
+    return res;
+}

@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
         ("history_path", po::value<std::string>(), "path to history")
         ("h_time_path", po::value<std::string>(), "path to heuristic by time")
         ("h_dist_path", po::value<std::string>(), "path to heuristic by distance")
+        ("solution_path", po::value<std::string>(), "path to result solution")
     ;
     
     po::variables_map vm;

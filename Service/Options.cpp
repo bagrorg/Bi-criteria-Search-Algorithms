@@ -43,5 +43,9 @@ Options optionsFromInput(const po::variables_map &vm) {
         opts.hDistFile = vm["h_dist_path"].as<std::string>();
     }
 
+    if (vm.count("solution_path")) {
+        opts.solutionFile = vm["solution_path"].as<std::string>();
+    }
+
     return opts;
 }

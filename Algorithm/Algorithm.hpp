@@ -3,6 +3,7 @@
 #include "Service/Measurements.hpp"
 #include "Service/Options.hpp"
 #include "Service/AlgorithmState.hpp"
+#include "Service/Solutions.hpp"
 
 class Algorithm {
 public:
@@ -19,6 +20,7 @@ public:
         if (!opts.historyFile.empty()) {
             writeHistory(history_, opts);
         }
+        writeSolutions(solutionPaths_, opts);
     }
 
     std::string getName() {
@@ -29,4 +31,5 @@ protected:
     std::string name_;
     Measurements res_;
     AlgorithmStateHistory history_;
+    Solutions solutionPaths_;
 };

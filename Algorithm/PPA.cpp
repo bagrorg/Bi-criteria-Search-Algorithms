@@ -57,6 +57,7 @@ void PPA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
         }
         if (writeHistory) updateHistory();
     }
+    solutionPaths_ = solutions_->getAllNodes();
 }
 
 void PPA::updateHistory() {
