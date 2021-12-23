@@ -15,7 +15,7 @@ void BOA::runAlgorithm(const Options &opts) {
     }();
 
     for (int i = 0; i < opts.iterations; i++) {
-        runAlgorithmImpl(graph, opts.startId, opts.goalId);
+        runAlgorithmImpl(graph, opts);
         open_->clear();
         solutions_->clear();
     }
@@ -36,22 +36,22 @@ void BOA::updateHistory() {
     });
 }
 
-bool BOA::isDominated(const BOANode& node, int goalId) {
+bool BOA::isDominated(const BOANode& node, int goalId, float epsTime) {
     bool dominatedByNode = node.getNode()->getHeuristicStatsTime().g >= gMin(node.getId());
-    bool dominatedBySolution = node.getNode()->getHeuristicStatsTime().F >= gMin(goalId);
+    bool dominatedBySolution = (1 + epsTime) * node.getNode()->getHeuristicStatsTime().F >= gMin(goalId);
     return dominatedBySolution || dominatedByNode;
 }
 
-void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
+void BOA::runAlgorithmImpl(const Graph &graph, const Options& opts) {
     {
-        float hDist = hDistFunc_(startId);
-        float hTime = hTimeFunc_(startId);
+        float hDist = hDistFunc_(opts.startId);
+        float hTime = hTimeFunc_(opts.startId);
         auto startNode = std::make_shared<Node>(
-            graph.getVertex(startId),
+            graph.getVertex(opts.startId),
             HeuristicStats{0, hDist, hDist},
             HeuristicStats{0, hTime, hTime}
         );
-        BOANode st = BOANode(startId, startNode);
+        BOANode st = BOANode(opts.startId, startNode);
         open_->add(st);
         if (writeHistory) updateHistory();
     }
@@ -59,9 +59,9 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
     while (!open_->isEmpty()) {
         auto best = open_->getBest();
 
-        if (isDominated(best, goalId)) continue;
+        if (isDominated(best, opts.goalId, opts.epsTime)) continue;
         setGMin(best.getId(), best.getNode()->getHeuristicStatsTime().g);
-        if (best.getId() == goalId) {
+        if (best.getId() == opts.goalId) {
             solutions_->add(best);
             if (writeHistory) updateHistory();
             continue;
@@ -71,7 +71,7 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
             auto newNode = best.extend(edge, graph, hDist, hTime);
-            if (isDominated(newNode, goalId)) continue;
+            if (isDominated(newNode, opts.goalId, opts.epsTime)) continue;
             open_->add(std::move(newNode));
         }
         if (writeHistory) updateHistory();

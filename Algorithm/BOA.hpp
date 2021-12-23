@@ -14,10 +14,10 @@ public:
     void runAlgorithm(const Options &opts) override;
 
 private:
-    void runAlgorithmImpl(const Graph &graph, int startId, int goalId);
+    void runAlgorithmImpl(const Graph &graph, const Options& opts);
     float gMin(int id);
     void setGMin(int id, float newG);
-    bool isDominated(const BOANode& node, int goalId);
+    bool isDominated(const BOANode& node, int goalId, float epsTime);
 
     void updateHistory();
 
