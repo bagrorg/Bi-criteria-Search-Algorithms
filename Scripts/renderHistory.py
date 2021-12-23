@@ -7,6 +7,8 @@ file_graph_name = sys.argv[2]
 file_output_name = sys.argv[3]
 start_id = int(sys.argv[4])
 goal_id = int(sys.argv[5])
+max_frames = int(sys.argv[6])
+duration = 200
 
 history = []
 nodes = []
@@ -108,7 +110,7 @@ for x, y in [nodes[start_id], nodes[goal_id]]:
     draw_base.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
 
 all_solutions = []
-group = 50
+group = 1 if max_frames == -1 else 1 + len(history) // max_frames
 cur = 0
 for open_paths, solutions_paths in tqdm(history):
     cur = (cur + 1) % group
@@ -127,7 +129,7 @@ for open_paths, solutions_paths in tqdm(history):
     if cur == 0:
         images.append(im)
 
-for _ in range(60):
+for _ in range(3000 // duration):
     images.append(images[-1].copy())
 
-images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=False, duration=50, loop=0)
+images[0].save(file_output_name, save_all=True, append_images=images[1:], optimize=False, duration=duration, loop=0)

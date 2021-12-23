@@ -9,6 +9,7 @@ struct HeuristicStats {
     float F;
 
     bool operator<(const HeuristicStats &rhs) const;
+    bool operator==(const HeuristicStats &rhs) const;
 };
 
 class Node {

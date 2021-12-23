@@ -40,6 +40,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Service/AlgorithmState.hpp
                               Algorithm/BOA.hpp
                               Algorithm/BOA.cpp
+                              Service/BOANode.hpp
+                              Service/BOANode.cpp
                               Service/HeuristicFunction.hpp
                               Service/HeuristicFunction.cpp)
 

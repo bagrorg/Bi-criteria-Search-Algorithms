@@ -1,6 +1,7 @@
 #include "BOA.hpp"
+#include "Service/BOANode.hpp"
 
-BOA::BOA(std::unique_ptr<Open<NodePtr>> open, std::unique_ptr<Open<NodePtr>> solutions,
+BOA::BOA(std::unique_ptr<MapSetOpen> open, std::unique_ptr<MapSetOpen> solutions,
          std::function<float(int)> hDistFunc, std::function<float(int)> hTimeFunc)
     : Algorithm("BOA*"),
       open_(std::move(open)), solutions_(std::move(solutions)),
@@ -28,6 +29,19 @@ void BOA::setGMin(int id, float newG) {
     gMin_[id] = newG;
 }
 
+void BOA::updateHistory() {
+    history_.push_back({
+        open_->getAddedNodes(),
+        solutions_->getAddedNodes()
+    });
+}
+
+bool BOA::isDominated(const BOANode& node, int goalId) {
+    bool dominatedByNode = node.getNode()->getHeuristicStatsTime().g >= gMin(node.getId());
+    bool dominatedBySolution = node.getNode()->getHeuristicStatsTime().F >= gMin(goalId);
+    return dominatedBySolution || dominatedByNode;
+}
+
 void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
     {
         float hDist = hDistFunc_(startId);
@@ -37,27 +51,29 @@ void BOA::runAlgorithmImpl(const Graph &graph, int startId, int goalId) {
             HeuristicStats{0, hDist, hDist},
             HeuristicStats{0, hTime, hTime}
         );
-        open_->add(startNode);
+        BOANode st = BOANode(startId, startNode);
+        open_->add(st);
+        if (writeHistory) updateHistory();
     }
 
     while (!open_->isEmpty()) {
         auto best = open_->getBest();
 
-        if (best->getHeuristicStatsTime().g >= gMin(best->getVertex().id) || best->getHeuristicStatsTime().F >= gMin(goalId)) continue;
-        setGMin(best->getVertex().id, best->getHeuristicStatsTime().g);
-        if (best->getVertex().id == goalId) {
+        if (isDominated(best, goalId)) continue;
+        setGMin(best.getId(), best.getNode()->getHeuristicStatsTime().g);
+        if (best.getId() == goalId) {
             solutions_->add(best);
+            if (writeHistory) updateHistory();
             continue;
         }
 
-        for (const Edge &edge: graph.getNeighbours(best->getVertex().id)) {
+        for (const Edge &edge: graph.getNeighbours(best.getId())) {
             float hDist = hDistFunc_(edge.to_id);
             float hTime = hTimeFunc_(edge.to_id);
-            std::cout << gMin(1) << std::endl;
-            auto newNode = std::make_shared<Node>(Node::extend(edge, graph, hDist, hTime, best));
-            std::cout << gMin(1) << std::endl;
-            if (newNode->getHeuristicStatsTime().g >= gMin(newNode->getVertex().id) || newNode->getHeuristicStatsTime().F >= gMin(goalId)) continue;
+            auto newNode = best.extend(edge, graph, hDist, hTime);
+            if (isDominated(newNode, goalId)) continue;
             open_->add(std::move(newNode));
         }
+        if (writeHistory) updateHistory();
     }
 }

@@ -1,11 +1,11 @@
 #include "Node.hpp"
 
 bool Node::operator==(const Node &other) const {
-    return v_.position == other.v_.position;
+    return std::make_pair(hsDist_, hsTime_) == std::make_pair(other.hsDist_, other.hsTime_) && v_.id == other.v_.id;
 }
 
 bool Node::operator<(const Node &other) const {
-    return std::make_pair(hsDist_, hsTime_) < std::make_pair(other.hsDist_, other.hsTime_);
+    return std::make_tuple(hsDist_, hsTime_, v_.id) < std::make_tuple(other.hsDist_, other.hsTime_, other.v_.id);
 }
 
 Vertex Node::getVertex() const {
@@ -50,4 +50,8 @@ Node Node::extend(const Edge &edge, const Graph &graph, float hDist, float hTime
 
 bool HeuristicStats::operator<(const HeuristicStats &rhs) const {
     return std::make_pair(F, h) < std::make_pair(F, h);
+}
+
+bool HeuristicStats::operator==(const HeuristicStats &rhs) const {
+    return std::make_pair(F, h) == std::make_pair(F, h);
 }
