@@ -4,7 +4,7 @@ A software project at the SPbU.
 ## Description 
 This project contains algorithms implementations that solves Bi-criteria pathfinding problem.
 
-<img src="/Images/nyc2.gif" width="700" height="150"/>
+<img src="/Images/nyc.gif" width="700" height="150"/>
 
 
 ## Getting started
