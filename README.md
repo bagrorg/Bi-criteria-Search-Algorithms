@@ -133,7 +133,7 @@ Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
 
-+ `run.sh {time graph input} {dist graph input} {coordinates graph input} {path to result graph} {path to time heuristics} {path to distance heuristics} {start idx} {goal idx} {path to built main program} {algorithm name} {history path} {epsilon time} {epsilon dist}` - main script that runs program on input graph
++ `run.sh {time graph input} {dist graph input} {coordinates graph input} {path to result graph} {path to time heuristics} {path to distance heuristics} {start idx} {goal idx} {path to built main program} {algorithm name} {epsilon time} {epsilon dist} {history path}` - main script that runs program on input graph
   + `{time graph input}`, `{dist graph input}`, `{coordinates graph input}` - paths to input files
   + `{path to result graph}`, `{path to time heuristics}`, `{path to distance heuristics}` - paths to output files
   + `{start idx}`, `{goal idx}` - vertexes indexes
