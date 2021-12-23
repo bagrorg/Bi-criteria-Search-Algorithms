@@ -35,5 +35,13 @@ Options optionsFromInput(const po::variables_map &vm) {
         opts.historyFile = vm["history_path"].as<std::string>();
     }
 
+    if (vm.count("h_time_path")) {
+        opts.hTimeFile = vm["h_time_path"].as<std::string>();
+    }
+
+    if (vm.count("h_dist_path")) {
+        opts.hDistFile = vm["h_dist_path"].as<std::string>();
+    }
+
     return opts;
 }

@@ -15,6 +15,8 @@ struct Options {
     float epsDist = 0.f;
     float epsTime = 0.f;
     std::string historyFile;
+    std::string hTimeFile;
+    std::string hDistFile;
 };
 
 Options optionsFromInput(const po::variables_map &vm);

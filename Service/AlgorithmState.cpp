@@ -7,8 +7,8 @@ void writeHistory(const AlgorithmStateHistory& history, const Options& opts) {
     int epoch = 0;
     for (const auto& state: history) {
         of << "e " << epoch++ << "\n";
-        for (const auto& node: state.openNodes) {
-            of << "p";
+        for (const auto& node: state.addedNodes) {
+            of << "n";
             const Node* curNode = &node;
             while (curNode) {
                 of << " " << curNode->getVertex().id;
@@ -16,7 +16,7 @@ void writeHistory(const AlgorithmStateHistory& history, const Options& opts) {
             }
             of << "\n";
         }
-        for (const auto& node : state.solutions) {
+        for (const auto& node : state.addedSolutions) {
             of << "s";
             const Node* curNode = &node;
             while (curNode) {

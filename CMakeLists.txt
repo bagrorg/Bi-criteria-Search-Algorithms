@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 project(search_algorithms)
 
 set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 find_package( Boost 1.40 COMPONENTS program_options REQUIRED )
 include_directories( ${Boost_INCLUDE_DIR} )
 
@@ -40,6 +41,8 @@ add_executable(main main.cpp Service/Measurements.cpp
                               Algorithm/BOA.hpp
                               Algorithm/BOA.cpp
                               Service/BOANode.hpp
-                              Service/BOANode.cpp)
+                              Service/BOANode.cpp
+                              Service/HeuristicFunction.hpp
+                              Service/HeuristicFunction.cpp)
 
 target_link_libraries(main LINK_PUBLIC ${Boost_LIBRARIES} )

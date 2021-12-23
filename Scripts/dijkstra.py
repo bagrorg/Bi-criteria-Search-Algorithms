@@ -15,11 +15,10 @@ def ReadTaskFromFile(path):
             v_count = int(line[2])
             g.vtxs = [Vertex(i, []) for i in range(v_count)]
         elif line[0] == 'a':
-            line = line.split(' ')
+            line = line.strip().split(' ')
             id1 = int(line[1]) - 1
             id2 = int(line[2]) - 1
-
-            cost = int(line[3][:-1])
+            cost = int(line[3])
 
             g.vtxs[id1].addN(Edge(id2, cost))
     file.close()
@@ -46,9 +45,10 @@ def Dijkstra(graph, idStart, openType = Open, closedType = Closed):
 
 file_name = sys.argv[1]
 file_to = sys.argv[2]
+start_id = int(sys.argv[3])
 
 g = ReadTaskFromFile(file_name)
-_, _, CLOSED, _ = Dijkstra(g, 0)
+_, _, CLOSED, _ = Dijkstra(g, start_id)
 file = open(file_to, 'w')
 
 for k in CLOSED.nodes:
