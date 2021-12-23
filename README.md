@@ -112,3 +112,14 @@ Indexing must starts from 0.
 + `renderHistory.py {history path} {graph path} {output path} {start id} {goal id} {duration} {max frames}` - making a gif from hastory file at `{history path}` using graph at `{graph path}` and saving it at `{output path}`. History is for path starting at `{start id}` and ending at `{goal id}`. `{duration}` and `{max frames}` - settings for gif output. Can be `-1` for default. Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
+
+## Sources
++ Hernández Ulloa, C., Yeoh, W., Baier, J. A., Zhang, H., Suazo, L., & Koenig, S. (2020). A Simple and Fast Bi-Objective Search Algorithm. [URL](https://ojs.aaai.org//index.php/ICAPS/article/view/6655)
++ Goldin, B., & Salzman, O. (2021). Approximate Bi-Criteria Search by Efficient Representation of Subsets of the Pareto-Optimal Frontier. [URL](https://ojs.aaai.org/index.php/ICAPS/article/view/15957)
+
+## Participants
+### Mentor
+Yakovlev Konstantin Sergeevich
+### Students
+Kulikov Daniil
+Sadykov Rustam
