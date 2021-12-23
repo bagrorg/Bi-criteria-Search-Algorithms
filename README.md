@@ -52,7 +52,7 @@ make -j nproc
 You can manage settings of execution using arguments.
 
 + `algo` - wich algorithm to use. Now supported - BOA*, BOA*-epsilon and PP-A* (to use BOA*-epsilon just use BOA* and pass epsilons)
-+ `report_path` - where to save execution description (empty right now)
++ `report_path` - where to save execution description
 + `graph_path` - path to graph description file
 + `iterations` - how much executions to provide
 + `eps_dist`, `eps_time` - epsilons for PP-A* and BOA*-epsilon algorithms for distance cost and time cost
@@ -147,19 +147,20 @@ Indexing must starts from 0.
 
 + `serviceForDijkstra.py` - contains interfaces for `dijkstra.py`
 
-+ `run.sh {time graph input} {dist graph input} {coordinates graph input} {path to result graph} {path to time heuristics} {path to distance heuristics} {start idx} {goal idx} {path to built main program} {algorithm name} {epsilon time} {epsilon dist} {history path}` - main script that runs program on input graph
-  + `{time graph input}`, `{dist graph input}`, `{coordinates graph input}` - paths to input files
-  + `{path to result graph}`, `{path to time heuristics}`, `{path to distance heuristics}` - paths to output files
-  + `{start idx}`, `{goal idx}` - vertexes indexes
-  + `{path to built main program}` - path to c++ built program
-  + `{algorithm name}` - algorithm (e.g. `BOA*`)
-  + `{history path}` - path to history output (optional)
-  + `{epsilon time}`, `{epsilon dist}` - epsilons (optional)
++ `run.py` - main script that runs program on input graph
+  + `{--time_graph_path}`, `{--dist_graph_path}`, `{--coords_graph_path}` - paths to input files
+  + `{--output_graph_path}`, `{--output_graph_path}`, `{--dist_heuristic_path}` - paths to output files
+  + `{--start_id}`, `{--goal_id}` - vertexes indexes
+  + `{--app_path}` - path to c++ built program
+  + `{--algo_name}` - algorithm (e.g. `BOA*`)
+  + `{--history_path}` - path to history output (optional)
+  + `{--eps_time}`, `{--eps_dist}` - epsilons (optional)
+  + `{--report_path}` -- report path (optional)
 Example
 ```
-./run.sh ../Data/USA-road-t.NY.gr ../Data/USA-road-d.NY.gr ../Data/USA-road-d.NY.co ../Data/Res.gr ../Data/timeHeur.txt ../Data/distHeur.txt 10 15 ../build/main PP-A* 0.25 0.25 ../Data/Hist.txt
+python3.9 run.py --time_graph_path ../Data/USA-road-t.NY.gr --dist_graph_path ../Data/USA-road-d.NY.gr --coords_graph_path ../Data/USA-road-d.NY.co --output_graph_path ../Data/Res.gr --output_graph_path ../Data/timeHeur.txt --dist_heuristic_path ../Data/distHeur.txt --start_id 31231 --goal_id 0 --app_path ../build/main --algo_name BOA* --eps_time 0 --eps_dist 0 --report_path ../Data/report.csv
 ```
-Notice that to run without epsilons but with history you need to set epsilons to 0.
+
 ## Sources
 + Hernández Ulloa, C., Yeoh, W., Baier, J. A., Zhang, H., Suazo, L., & Koenig, S. (2020). A Simple and Fast Bi-Objective Search Algorithm. [URL](https://ojs.aaai.org//index.php/ICAPS/article/view/6655)
 + Goldin, B., & Salzman, O. (2021). Approximate Bi-Criteria Search by Efficient Representation of Subsets of the Pareto-Optimal Frontier. [URL](https://ojs.aaai.org/index.php/ICAPS/article/view/15957)
