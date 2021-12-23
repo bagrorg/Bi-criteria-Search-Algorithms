@@ -9,6 +9,8 @@ start_id = int(sys.argv[4])
 goal_id = int(sys.argv[5])
 duration = int(sys.argv[6])
 max_frames = int(sys.argv[7])
+w = int(sys.argv[8])
+h = int(sys.argv[9])
 if duration == -1:
     duration = 200
 
@@ -16,7 +18,10 @@ history = []
 nodes = []
 edges = []
 
-w, h = 1000, 1000
+if w == -1:
+    w = 1000
+if h == -1:
+    h = 1000
 margin = 0.05
 min_x, max_x, min_y, max_y = None, None, None, None
 
@@ -106,10 +111,14 @@ for x, y in nodes:
     x, y = transform(x, y)
     draw_node(draw_base, x, y, 'black')
 
-for x, y in [nodes[start_id], nodes[goal_id]]:
-    x, y = transform(x, y)
-    sz = 1
-    draw_base.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
+x, y = nodes[start_id]
+x, y = transform(x, y)
+sz = 1
+draw_base.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
+x, y = nodes[goal_id]
+x, y = transform(x, y)
+sz = 1
+draw_base.rectangle((x - sz, y - sz, x + sz, y + sz), fill='red')
 
 all_solutions = []
 group = 1 if max_frames == -1 else 1 + len(history) // max_frames
@@ -126,10 +135,19 @@ for open_paths, solutions_paths in tqdm(history):
         draw_path(draw_im, cur_path, open_path_color)
 
     all_solutions.extend(solutions_paths)
-    for cur_path in all_solutions:
-        draw_path(draw_im, cur_path, solution_color)
     if cur == 0:
         images.append(im)
+    if (cur + 1) % group == 0:
+        for cur_path in all_solutions:
+            draw_path(draw_im, cur_path, solution_color)
+        x, y = nodes[start_id]
+        x, y = transform(x, y)
+        sz = 1
+        draw_im.rectangle((x - sz, y - sz, x + sz, y + sz), fill='green')
+        x, y = nodes[goal_id]
+        x, y = transform(x, y)
+        sz = 1
+        draw_im.rectangle((x - sz, y - sz, x + sz, y + sz), fill='red')
 
 for _ in range(3000 // duration):
     images.append(images[-1].copy())
